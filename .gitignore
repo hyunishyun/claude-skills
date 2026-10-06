@@ -1,0 +1,7 @@
+dist/
+*.zip
+.DS_Store
+Thumbs.db
+
+# managed by the Claude desktop app, not part of this repo
+synced/
