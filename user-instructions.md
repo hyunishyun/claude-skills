@@ -11,6 +11,15 @@ Loaded from `~/.claude/CLAUDE.md` (`@~/.claude/skills/user-instructions.md`). Th
 - Don't use chrisbanes `to-plan`, `deliver-spec`, `implement-with-subagents`, `run-github-project` or `shepherd` — superpowers owns planning, execution and PRs. His `kotlin-*`, `compose-*` and `gradle-run` skills are fine.
 - If a skill appears twice (`anthropic-skills:<name>` and `<name>`), use the unprefixed copy from `~/.claude/skills`; the prefixed one is the Claude.ai upload and may be stale.
 
+### Skill map (the skill list runs out of description space; these may show name-only)
+
+- `superpowers:brainstorming` — before building anything new; `writing-plans` — after the spec is approved; `executing-plans` / `subagent-driven-development` — run the approved plan.
+- `superpowers:systematic-debugging` — any bug, failing test, crash or odd device behaviour, before proposing a fix.
+- `superpowers:test-driven-development` — pure logic (see TDD exceptions below); `verification-before-completion` — before saying done/fixed/passing or committing.
+- `superpowers:requesting-code-review` / `receiving-code-review` — big rounds and PR feedback; `finishing-a-development-branch` — after the device test.
+- `chrisbanes-skills:kotlin-concurrency-and-flow`, `compose-state-and-effects`, `compose-ui-testing-patterns`, `compose-performance`, `compose-animations`, `gradle-run` — phone-side Kotlin/Compose work and Gradle runs.
+- `mwdat-android:*` — Meta's DAT SDK reference (display-access, inputs, camera-streaming, session-lifecycle, mockdevice-testing, debugging, live-debugging-mcp).
+
 ### Standing answers for superpowers
 
 - **Worktrees:** Android projects get no worktree — Hyun builds from the folder open in Android Studio, and a new worktree has no `local.properties`. Before the spec is written, create branch `hyun/<feature>` (team repos: `<name>/<feature>`) in the main checkout; that branch is the consent. Never implement on `main`. Web-only repos may use `.worktrees/`.
