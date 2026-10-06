@@ -32,7 +32,7 @@ Copied unchanged on 2026-10-06 from [antfu/skills](https://github.com/antfu/skil
 | `vite`, `vitest`, `vitepress` | Vite build/config, Vitest tests, VitePress docs sites |
 | `unocss`, `pnpm` | UnoCSS atomic CSS, pnpm workspaces and catalogs |
 
-### Third-party: Android / Kotlin / debugging (for the glasses apps' phone side)
+### Third-party: Android (for the glasses apps' phone side)
 
 Copied unchanged on 2026-10-06; each folder keeps its source license as `LICENSE.source`. Don't edit these here; to update, download the source repo again and replace the folder.
 
@@ -45,11 +45,6 @@ Copied unchanged on 2026-10-06; each folder keeps its source license as `LICENSE
 | `ml-kit-genai-prompt-api` | android/skills | On-device Gemini Nano via ML Kit Prompt API: prompts, structured output |
 | `android-permissions-security` | android/skills | Manifest permissions and exported-component audit |
 | `agp-9-upgrade` | android/skills | Moving a project to Android Gradle Plugin 9 (only when upgrading) |
-| `kotlin-concurrency-and-flow` | [chrisbanes/skills](https://github.com/chrisbanes/skills) @f872f97 (Apache-2.0) | Coroutine scope ownership, cancellation, StateFlow/SharedFlow |
-| `compose-state-and-effects` | chrisbanes/skills | Compose state hoisting, `LaunchedEffect`/`DisposableEffect`, Flow collection |
-| `compose-ui-testing-patterns` | chrisbanes/skills | Compose UI and screenshot tests, semantics assertions |
-| `systematic-debugging` | [obra/superpowers](https://github.com/obra/superpowers) @8ca22db (MIT) | Root cause first: reproduce, trace, one hypothesis at a time |
-| `verification-before-completion` | obra/superpowers | Run the check and read its output before saying "done" |
 
 ### Plugins (installed through Claude Code, not stored in this repo)
 
@@ -60,10 +55,16 @@ claude plugin install mwdat-android@mwdat-android-marketplace --scope user
 claude plugin marketplace add facebook/meta-wearables-webapp
 claude plugin install meta-wearables-webapp@meta-wearables --scope user
 claude plugin install meta-wearables-webapp-game@meta-wearables --scope user
+claude plugin marketplace add chrisbanes/skills
+claude plugin install chrisbanes-skills@chrisbanes-skills --scope user
+claude plugin marketplace add obra/superpowers
+claude plugin install superpowers@superpowers-dev --scope user
 ```
 - `mwdat-android` (Meta): DAT SDK for Android — session, display, inputs, camera, speech, motion, MockDevice, debugging.
 - `meta-wearables-webapp` (Meta): Ray-Ban Display **Web Apps** — build, UI Toolkit, on-device testing, performance, publish, WebMCP. 
 - `meta-wearables-webapp-game` (Meta): Web App **games** for the glasses (Vite + TypeScript + Three.js): create, iterate with frame stats, validate, logging, game director critique.
+- `chrisbanes-skills` ([chrisbanes/skills](https://github.com/chrisbanes/skills), Apache-2.0): Kotlin coroutines/Flow, Compose state, effects, animations, focus, performance, UI tests, Gradle runs, API design, plus his planning/spec workflow skills.
+- `superpowers` ([obra/superpowers](https://github.com/obra/superpowers), MIT): systematic debugging, verification before completion, TDD, brainstorming, plans, code review, worktrees. **Its SessionStart hook tells Claude to check skills before every reply.** User instructions (CLAUDE.md, direct requests) still win over its workflows. Turn it off with `claude plugin disable superpowers@superpowers-dev`.
 
 ## Set up (once)
 
