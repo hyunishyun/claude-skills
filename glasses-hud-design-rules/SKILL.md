@@ -1,13 +1,15 @@
 ---
 name: "glasses-hud-design-rules"
-description: "Use when designing or changing any screen for Meta Ray-Ban Display via the Wearables DAT SDK display DSL (sendContent, buttonGroup, onClick), including animated or character screens, proactive nudges, several features sharing one display, Figma glasses frames and phone screens that mirror the glasses: cursor-reset, snapshot, animation, input and turn-taking rules that keep glasses UI usable. Use it for any glasses HUD or card design question, even if the SDK is not named."
+description: "Use when designing or changing a native Meta Ray-Ban Display screen (DAT display DSL: sendContent, buttonGroup, cards), incl. animated/character screens, nudges, shared display, Figma glasses frames: cursor-reset, snapshot, input and turn-taking rules. Web Apps: Meta UI Toolkit leads."
 ---
 
 # Glasses HUD design rules (Meta DAT SDK 0.9.0 and 1.0.0, verified on device)
 
+Scope: native DAT display-DSL apps. For **Web Apps**, Meta's UI Toolkit guidance (`meta-wearables-webapp:ai-glasses-webapp-ui`) decides components, text styles and Back (it says: no in-app Back button); only the content and turn-taking rules (13, 18, 20–23) carry over.
+
 ## What the hardware actually gives you
 
-- The display is a **snapshot**. Every `sendContent { }` replaces the whole screen; the renderer resets the cursor to the **first button** of the new content (1.0: to the button with `ActionRole.PRIMARY`). There is no focus API.
+- The display is a **snapshot**. Every `sendContent { }` replaces the whole screen; the renderer resets the cursor to the **first button** of the new content (1.0: to the button with `ActionRole.PRIMARY` [JAR/SAMPLE — not yet measured on device; until measured, also put the next action first]). There is no focus API.
 - 0.9.0: the DSL exposes seven views (`flexBox`, `text`, `button`, `buttonGroup`, `icon`, `image`, `video`) and **one event: `onClick`**. No scroll, rotate, long-press or gesture events reach the app; the Neural Band pinch-and-twist dial is consumed by the glasses OS.
 - 1.0.0 adds clickable cards (`flexBox(onClick = …)`), `flexGrow`, `wrap`, `image(bitmap, ImageSize.ICON | FILL, CornerRadius)`, and the inputs capability (glasses capture button, Back, Nav, Select; `consumeBack = true`). The cursor itself is still moved by the system.
 - With the band sources **not** subscribed, the Neural Band presses buttons natively (pinch = press, thumb swipe = move). Subscribing a source takes it away from the cards (`ray-ban-display-app-dev` → Inputs).

@@ -1,6 +1,6 @@
 ---
 name: "fridge-assistant-project"
-description: "Use when continuing work on Fridge Assistant (Android app for Meta Ray-Ban Display, com.hyun.fridgeassistant): paths, architecture, decisions, privacy rules, current state and next steps."
+description: "Use when working on Fridge Assistant (Android app for Meta Ray-Ban Display, com.hyun.fridgeassistant, folder FridgeAssistance): paths, architecture, decisions, privacy rules, current state and next steps."
 ---
 
 # Fridge Assistant — project context

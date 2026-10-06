@@ -21,6 +21,7 @@ Dated record of where the knowledge in these skills came from, which sources dis
 | 10/4 noon | HackIX | Submission deadline (what was submitted: to confirm) | MASTER_DOC |
 | 10/5 | Skills | First skill harvest (SDK facts, HUD rules 14–18, harvest step, playbook, Bee There skill); Back rule made conditional | chat "프로젝트 학습 내용 재사용 방법" |
 | 10/6 | Skills | This repo: 9 skills, hackix26 knowledge added, conflicts below settled | chat in project "Hyun's Capstone" |
+| 10/6 | Skills | Repo moved to GitHub (`~/.claude/skills`); third-party skills added (antfu, Google android/skills); plugins: Meta DAT + Web App + game, chrisbanes, superpowers. Hyun chose superpowers as the process (Korean 요약 kept). Cross-check of all skills: Web Apps routed to Meta's plugin, explicit input sources, release-channel gating, per-project Gradle/AGP, Windows tool notes, standing answers for superpowers, descriptions shortened, 5 web skills parked (description budget) | Claude Code session 10/6 |
 
 ## Conflict ledger
 

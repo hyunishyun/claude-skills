@@ -1,6 +1,6 @@
 ---
 name: "liftlens-project"
-description: "Use when continuing work on LiftLens Mini / Production HUD (Meta Ray-Ban Display, DAT SDK) in the LiftLensMini Android project: paths, architecture, models, schema, conventions and current state."
+description: "Use when working on LiftLens Mini / Production HUD (Meta Ray-Ban Display, DAT SDK; folder LiftLensMini): paths, architecture, models, schema, conventions and current state."
 ---
 
 # LiftLens Mini — project context

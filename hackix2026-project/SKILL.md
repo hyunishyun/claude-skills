@@ -1,6 +1,6 @@
 ---
 name: "hackix2026-project"
-description: "Use when continuing, reviewing, pitching, archiving, posting about or reusing anything from SCAD Hack iX 2026 (Oct 2026): Bee There (cat companion, repo hack-ix-2026), the team OCD Companion (repo hackix26: compulsion agent with camera door-lock loop detection, Riya's obsessive agent, MomentConductor), and the Ailo build that combined them. Covers the two repos and why there are two, timeline, architecture, product rules, decisions, device results, state and open items. Also use when another project (e.g. the XR 455 capstone) wants to reuse its session, display-arbiter, camera, vision or companion patterns."
+description: "Use for SCAD Hack iX 2026 work: Bee There (repo hack-ix-2026, folder HackIX2026), OCD Companion (repo hackix26), the Ailo build — repos, architecture, decisions, device results, open items; also when reusing their session, display-arbiter, camera or companion patterns."
 ---
 
 # HackIX 2026 — Bee There, OCD Companion (hackix26) and Ailo
@@ -14,7 +14,7 @@ Work loop `plan-approve-build-loop` · screens `glasses-hud-design-rules` · SDK
 | Repo | Local folder | Period | What |
 | --- | --- | --- | --- |
 | `hyunishyun/hack-ix-2026` | `…\Hyun's Playground\HackIX2026` | 9/26 – 10/4 | Hyun's first repo: team workflow, DAT setup (PRs #1–5), DAT 1.0 upgrade on `main` (10/2), **Bee There** companion (`feature/companion-glasses`), then **Ailo** on `hyun/ailo-base` (10/4, tag `ailo-demo-2026-10-04`) |
-| `hackix26` (owned by Hyun; Riya, two UX students) | — (confirm path) | 10/2 – 10/4 | Team **OCD Companion** built to Riya's MASTER_DOC: `core-glasses`, `agent-compulsive` (Hyun), `agent-obsessive` (Riya), `journal`, `app`; integration on `team/one-app` |
+| `hackix26` (owned by Hyun; Riya, two UX students) | `C:\Users\AISTUDIO\Desktop\hackix26` | 10/2 – 10/4 | Team **OCD Companion** built to Riya's MASTER_DOC: `core-glasses`, `agent-compulsive` (Hyun), `agent-obsessive` (Riya), `journal`, `app`; integration on `team/one-app` |
 
 Why two: the team switched to Riya's two-agent plan on 10/2 and built it in `hackix26`. On 10/4, when the integrated build got stuck, Hyun **restarted from the early known-good base** of `hack-ix-2026` (`main`, DAT 1.0) and brought Riya's agent, `core-glasses`, `journal` and `agent-compulsive` over → Ailo (Hyun, 2026-10-06). Neither integration branch is merged into its `main`.
 
@@ -46,7 +46,7 @@ Security: never commit `local.properties`, keys, tokens, `test-media/`, `.env` o
 
 ## Open items (확인 필요)
 
-Which build, repo and tag were submitted (release notes suggest `v0.2.0-hackix`, but Ailo has tag `ailo-demo-2026-10-04`) · whether `SERVICE_NOT_FOUND` was resolved · LICENSE, branch cleanup, foreground service, arm64-only APK, MediaPipe telemetry opt-out · `hackix26` local path · Riya's remaining items (MASTER_DOC copy still asks questions; her email in commit metadata).
+Which build, repo and tag were submitted (release notes suggest `v0.2.0-hackix`, but Ailo has tag `ailo-demo-2026-10-04`) · whether `SERVICE_NOT_FOUND` was resolved · LICENSE, branch cleanup, foreground service, arm64-only APK, MediaPipe telemetry opt-out · Riya's remaining items (MASTER_DOC copy still asks questions; her email in commit metadata).
 
 ## Reusable from this project
 

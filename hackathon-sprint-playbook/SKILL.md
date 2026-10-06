@@ -1,6 +1,6 @@
 ---
 name: "hackathon-sprint-playbook"
-description: "Use for any time-boxed build with Hyun — hackathons, design sprints, capstone crits and midterms, game jams: preparing before the prompt drops, turning a brief into concepts mapped to verified tech, rapid user surveys, team contracts and integration, round planning with a known-good demo, inclusive/responsible design checks, demo video, release and archived version. Use it as soon as a brief, prompt, judging criteria, rubric or deadline-driven team build appears, even if the word hackathon is not used."
+description: "Use for a hackathon, design sprint or game jam with Hyun: prep, brief/prompt card → concepts, quick surveys, team contracts, build rounds with a known-good demo, inclusive checks, demo video, release. XR 455 milestones: xr455-capstone leads."
 ---
 
 # Hackathon sprint playbook (from SCAD Hack iX 2026)
@@ -44,7 +44,8 @@ Goal: a demo that works on stage and a story the judges can follow, built on thi
 
 ## 6. Build in rounds
 
-- Round 0 prerequisites, then rounds that each end in a device checklist, a status doc and one commit (see `plan-approve-build-loop`). Batch safe stages; fewer approvals.
+- Round 0 prerequisites, then rounds that each end in a device checklist, a status doc and one merged branch (see `plan-approve-build-loop`). Batch safe stages; fewer approvals.
+- In Claude Code each round is **one superpowers cycle**: one spec + one plan for the whole round (not per feature); capability probes take the Spike path (no spec); TDD only for pure logic (standing exceptions in `~/.claude/skills/user-instructions.md`).
 - Order: core moment end-to-end on hardware first, polish later. Keep a **known-good demo APK tied to a commit**; feature freeze before the demo.
 - Mock external integrations with the real data shape; disclose mocks and pre-recorded clips in the pitch and the archive.
 - Design and code in parallel: designers own frames, the developer owns SDK/session/renderer; designs reach Claude as exported specs (JSON + PNG), not screenshots. Licensed art may ship inside the APK but is never committed to a repo that will go public.
@@ -67,6 +68,8 @@ Understandable · more than one way to participate · not dependent on one sense
 Write a short retrospective, record which build/tag was actually submitted, then run the skill harvest (`plan-approve-build-loop` step 7) so the next project starts from what this one proved.
 
 ## Changelog
+
+- 2026-10-06 (b): rounds map to one superpowers cycle; a round ends in a merged branch.
 
 - 2026-10-06: team setup, integration (one branch, Story-mode fallback, restart from base), research brief, demo video, release audit, usage-limit handoffs — from hackix26 / OCD Companion docs.
 - 2026-10-05: created from HackIX2026 (readiness checkpoint, brief, survey v3, dev plan, rounds 1–4).

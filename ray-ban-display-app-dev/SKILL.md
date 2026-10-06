@@ -1,6 +1,6 @@
 ---
 name: "ray-ban-display-app-dev"
-description: "Use when building or debugging an Android app (or a Web App) for Meta Ray-Ban Display glasses with the Wearables DAT SDK 1.0 (display, inputs, Neural Band, motion, speech, camera, on-phone vision, sprite animation, on-phone AI calls), including build environment, off-device verification and the Figma design track. Use it whenever a Ray-Ban Display, DAT SDK, mwdat, glasses HUD or Neural Band question comes up, even if the user does not name the SDK."
+description: "Use when building or debugging an Android app for Meta Ray-Ban Display with the Wearables DAT SDK 1.0 (session, display, inputs, Neural Band, camera, speech, motion, on-phone vision/AI): device-verified facts, build environment, verification. Web Apps: Meta's webapp plugin leads."
 ---
 
 # Ray-Ban Display app development (Meta Wearables DAT SDK 1.0.0)
@@ -13,10 +13,11 @@ Second hardware source: hackix26 / OCD Companion (2026-10-03): Samsung S25 / And
 
 - Maven Central `com.meta.wearable:mwdat-core / -camera / -display / -inputs / -speech / -motion / -mockdevice:1.0.0`. No GitHub Packages token is needed any more (older docs, e.g. a team doc written for v0.7, say GitHub Maven + `read:packages` token: outdated).
 - Minimums for DAT 1.0.0 (Meta "Version Dependencies" page): glasses firmware **V128**, Meta AI app **V290**. Older docs that say firmware v21 / app v254 are for older DAT versions.
-- Developer Mode: Meta AI app → Settings → App Info → tap the version 5×. Leaving `mwdat_application_id` / `mwdat_client_token` empty in `local.properties` = Developer Mode, which works [DEVICE, hackix26]. Never ship real credentials inside a public APK.
-- Display, Inputs, Motion and Speech are **beta** capabilities; capabilities can also be gated server-side per user (`CAPABILITY_DENIED`).
-- Meta's own Claude Code tooling: `claude plugin marketplace add facebook/meta-wearables-dat-android`, then `claude plugin install mwdat-android@mwdat-android-marketplace`; docs MCP at `https://mcp.developer.meta.com/wearables` (`search_dat_docs`). A repo can register it in `.claude/settings.json`.
-- Build environment (school PC): Android Studio bundles JDK 25, which **cannot run Gradle 8.13** → set Gradle JDK to JBR 21 (`~/.jdks/jbr-21.0.11`) or `JAVA_HOME` to a JDK 21. Modules target JVM 17 bytecode without `jvmToolchain(17)` (no JDK 17 installed). Without a wrapper script, run the cached distribution: `ls -d ~/.gradle/wrapper/dists/gradle-8.13-bin/*/gradle-8.13`.
+- Developer Mode: Meta AI app → Settings → App Info → tap the version 5×. Leaving `mwdat_application_id` / `mwdat_client_token` empty in `local.properties` = Developer Mode, which works [DEVICE, hackix26]; Meta's docs use `"0"` for both — either is fine, never real values in git. Never ship real credentials inside a public APK. If registration or sessions suddenly fail after a Meta AI app or firmware update, re-check Developer Mode first (it can reset, and it is per linked device — `mwdat-android:debugging`).
+- Display, Inputs, Motion and Speech are **beta** capabilities; capabilities can also be gated server-side per user (`CAPABILITY_DENIED`). Per Meta's plugin skills: Inputs, Motion, Speech, standalone Camera Capture, Audio Streaming and Voice Invocations must be enabled for the app in Wearables Developer Center and **cannot go to production release channels yet**; an Inputs denial is `InputsError.PERMISSION_DENIED` (not a runtime permission, `requestPermission` doesn't fix it). Developer Mode builds worked without this [DEVICE, hackix26]. Check this before promising a public APK.
+- Meta's own Claude Code tooling: `claude plugin marketplace add facebook/meta-wearables-dat-android`, then `claude plugin install mwdat-android@mwdat-android-marketplace`; docs MCP at `https://mcp.developer.meta.com/wearables` (`search_dat_docs`). Installing the plugin already registers that MCP server — don't add it again in `.claude/settings.json`. Web Apps have their own Meta plugin (`meta-wearables-webapp`, games: `meta-wearables-webapp-game`).
+- Build environment (school PC, checked 2026-10-06): each project pins Gradle in its own wrapper — FridgeAssistance / LiftLensMini: Gradle 8.14.1 + AGP 8.13.2 / 8.11.1; HackIX2026 / VisualMemory: Gradle 9.6.0 + AGP 9.4.1; hackix26: Gradle 8.13. DAT 1.0.0 works on both AGP lines; LiftLensMini is still on DAT 0.9.0. Android Studio's bundled JDK 25 cannot run Gradle 8.x → Gradle JDK = JBR 21 (`~/.jdks/jbr-21.0.11`, also `JAVA_HOME`). Modules target JVM 17 bytecode without `jvmToolchain(17)` (no JDK 17 installed). Run the wrapper: `.\gradlew.bat <task>` in PowerShell, `./gradlew <task>` in Git Bash.
+- Meta plugin skills on Windows: their examples assume bash/macOS. Gradle → `.\gradlew.bat`; port check → `Get-NetTCPConnection -LocalPort 5173` instead of `lsof`; Chrome for CDP → the PowerShell block in `ai-glasses-webapp-optimize-performance`, not `npm run chrome`; MockDevice video → `ffmpeg -i in.mp4 -c:v libx265 -tag:v hvc1 -vf scale=540:960 out.mp4` (not `videotoolbox`). Node/npm are not installed on the school PC (2026-10-06).
 - Manifest: `BLUETOOTH`, `BLUETOOTH_CONNECT`, `INTERNET`; meta-data `com.meta.wearable.mwdat.APPLICATION_ID` and `CLIENT_TOKEN` (values from `local.properties` via manifest placeholders, never committed); opt out with `ANALYTICS_OPT_OUT` and `CRASH_REPORTING_OPT_OUT` = true. Registration and permissions go through the Meta AI app and come back on a custom deep-link scheme (VIEW intent filter).
 - The DAT libraries merge no CAMERA permission, so the phone camera intent (`TakePicture`) works without asking.
 - Capabilities belong to one `DeviceSession`; when the session ends (fold, Bluetooth drop) they are gone and must be added again on the new session.
@@ -38,19 +39,20 @@ Second hardware source: hackix26 / OCD Companion (2026-10-03): Samsung S25 / And
   - `text(text, style = TextStyle.HEADING | BODY | META, color = TextColor.PRIMARY | SECONDARY, flexGrow, …)` — only two text colors.
   - `image(uri = … or bitmap = …, sizePreset = ImageSize.ICON | FILL, cornerRadius = CornerRadius.NONE | SMALL | MEDIUM)` — app-drawn bitmaps work (thumbnails, colored dots).
   - `icon(IconName.X, style = IconStyle.FILLED | OUTLINE)`; about 130 IconName values (e.g. CALENDAR, CLOCK, CHECKMARK, FORK_KNIFE, CART, CONTAINER_WITH_LID, EYE, FOUR_CORNER_FRAME, HOUSE, ARROW_LEFT, CARET_RIGHT, META_AI, PAPER_AIRPLANE, PHONE, PLUS, X, TWO_ARROWS_CLOCKWISE). There is no camera icon. Dump the enum with javap before using a new one.
-  - `buttonGroup { button(label, style = ButtonStyle.PRIMARY | SECONDARY | OUTLINE, iconName, onClick, actionRole = ActionRole.PRIMARY) }` — ActionRole.PRIMARY marks where the cursor starts.
+  - `buttonGroup { button(label, style = ButtonStyle.PRIMARY | SECONDARY | OUTLINE, iconName, onClick, actionRole = ActionRole.PRIMARY) }` — ActionRole.PRIMARY marks where the cursor starts [JAR/SAMPLE — not yet measured on device; until measured, also put the next action first].
   - Clickable card rows: `flexBox(padding = 12, background = CARD, onClick = …) { row: column(flexGrow 1){ image FILL }, column(flexGrow 5){ text … } }` (DisplayAccess pattern). *Unverified on our device:* cursor movement over clickable cards, send time with several images, how many rows fit — measure with a display test screen first.
 - One render path: snapshot → card model (pure, unit-tested) → send only when the card changed (an identical resend still resets the cursor). Load bitmaps before sending; keep them small (≈128 px rows, 256 px hero).
 - When several features can draw, put one **display arbiter** in front of `sendContent` (owner + priority, e.g. safety > conversation > nudge > idle; it re-sends only when the top card changes). A transition is one send: post the new top card first, then release the old one, so the old card never flashes.
 - Retry a failed send (twice worked in hackix26) and redraw the current card when the display returns to STARTED. A card with no title, body or buttons can render as a single invisible space = blank glasses (*unverified* on device).
 - Meta's docs say a send can take up to 5 s; measured full-screen sends were ~170–195 ms (below).
-- [DEVICE, 2026-10-04, hackix26 `team/one-app`] The display failed with `SERVICE_NOT_FOUND`, and Meta's own sample app showed nothing either → a platform/device-state problem, not app code. Resolution not recorded: if it happens, test the official sample first, then restart glasses, Meta AI app and phone.
+- [DEVICE, 2026-10-04, hackix26 `team/one-app`] The display failed with `SERVICE_NOT_FOUND`, and Meta's own sample app showed nothing either → a platform/device-state problem, not app code. Resolution not recorded: if it happens, test the official sample first, then restart glasses, Meta AI app and phone. If the DAT Inspector MCP is available, run `mwdat-android:live-debugging-mcp` first.
 - [DEVICE, HackIX 2026-10-02] Full-screen send time: 192 px bitmap + SDK text averaged 187–195 ms at 250/500/1000 ms intervals; one 384 × 304 bitmap with text drawn into it averaged 169 ms (853 frames at 500 ms).
 - [DEVICE] **SDK `text` flickers on every full-screen resend; an `image` does not.** On any screen that is resent repeatedly, draw captions into the bitmap (Android Canvas) instead of using `text`.
 - [DEVICE] `flexBox(onClick)` on a card that is being re-sent for animation does **not** register clicks. Animated screens get their input from the inputs capability, not from DSL clicks.
 
 ## Inputs (`session.addInputs`)
 
+- **Always pass `sources` explicitly.** Meta's `mwdat-android:inputs` sample uses `InputsConfiguration(consumeBack = true)`, whose default subscribes every source (incl. `NEURAL_BAND`, `NEURAL_BAND_DRAG`, `CAPTOUCH`) — that takes the band and temple away from display buttons [DEVICE, see below]. Don't copy the sample's default into a button-card app.
 - `InputsConfiguration(sources = …, consumeBack = true)`. Subscribe only the sources the app truly handles itself: Fridge used `setOf(CAPTOUCH, CAPTURE_BUTTON, ACTION_BUTTON)`, but subscribing `CAPTOUCH` takes temple taps away from the cards (hackix26), so card-based apps may leave it out. CAPTURE_BUTTON alone once delivered nothing (BirdSpotter); without `consumeBack` Back ends the whole session.
 - Events: `InputEvent.Capture(pressType = SHORT_PRESS | HOLD | DOUBLE_PRESS, source)`, `Back`, `Nav`, `Select`. The Neural Band moves the cursor and is handled by the system.
 - Full enums [JAR, `mwdat-inputs-1.0.0`]: `InputEvent` = `Nav(UP/DOWN/LEFT/RIGHT)`, `Select`, `Back`, `Button(ACTION)`, `Capture(SHORT_PRESS/HOLD/DOUBLE_PRESS)`, `Drag(DOWN/MOVE/UP, x, y, dx, dy)`; `InputSource` = `CAPTOUCH`, `NEURAL_BAND`, `CAPTURE_BUTTON`, `ACTION_BUTTON`, `NEURAL_BAND_DRAG`, `UNKNOWN`. Inputs report decoded interactions, never raw sensor signal.
@@ -83,8 +85,8 @@ Second hardware source: hackix26 / OCD Companion (2026-10-03): Samsung S25 / And
 
 - Needs the Meta `Permission.MICROPHONE`. `start()` / `stop()`; flows `state`, `transcriptions` (TranscriptionResult: text, isFinal, confidence), `locale`, `errors`, `errorDetails`.
 - No language setting: `SpeechConfiguration` takes only a dispatcher, `locale` is read-only and came back empty. English is transcribed exactly ("Milk Two bottles."); Korean comes out as English sounds. Plan voice features in English; other languages would need Android `SpeechRecognizer` on the phone mic. Confirmed independently three times (Fridge Assistant F6, Bee There, Riya's obsessive agent).
-- Bluetooth HFP audio is 8 kHz mono. The glasses mic does not capture the other person's voice well (Bee There) — bundle a transcript for demos.
-- "Hey Meta, start <app>" launch exists in the docs but needs a Developer Center permission; *untried*.
+- Bluetooth HFP audio is 8 kHz mono (raw glasses audio at 16/44.1/48 kHz PCM via the camera stream: `mwdat-android:audio-streaming`, experimental, needs CAMERA + MICROPHONE). The glasses mic does not capture the other person's voice well (Bee There) — bundle a transcript for demos.
+- "Hey Meta, start <app>" launch exists in the docs but needs a Developer Center permission; *untried* — see `mwdat-android:voice-invocations`.
 
 ## Camera
 
@@ -93,6 +95,7 @@ Second hardware source: hackix26 / OCD Companion (2026-10-03): Samsung S25 / And
 - Camera stream, display and inputs work together in one session [DEVICE, Fridge + hackix26]. Stop the camera after ~30 s idle; keep the phone screen on while a HUD is shown (the camera stops in the background — a foreground service would be needed for locked-screen use).
 - [DEVICE, hackix26 2026-10-03] LOW stream at 15 fps = **360 × 640 I420** (345,600 bytes), rotate 0°; first frame ~3.5 s after attach; ~10 frames/s processed with on-phone MediaPipe. Docs also list 504 × 896 and 720 × 1280 at 2/7/15/24/30 fps.
 - [DEVICE] **Read `camera.stream` before `camera.stop()`, and always `close()` the camera.** Reading it after `stop()` threw, `close()` was skipped, and the glasses ended the whole session ~4 s later.
+- Release order: read `camera.stream` → `stop()` → `close()` → `session.removeCamera()` [JAR; Meta `camera-streaming`], then `addCamera` again.
 - Re-adding a camera right after releasing it failed once (`CRITICAL_STREAM_ERROR`, no frame): wait ~2 s before re-adding and retry once if the stream fails before its first frame (fix unit-tested only).
 - Whether the capture LED lights for third-party streaming is undocumented — don't claim it either way.
 
@@ -118,11 +121,15 @@ Second hardware source: hackix26 / OCD Companion (2026-10-03): Samsung S25 / And
 
 ## Web Apps (Ray-Ban Display Web App — CONDUCTOR, personal project, 2026-09)
 
-- Per Meta's Web App docs (*not device-verified by us*): pinch → `Enter`, thumb swipes → arrow keys, Back → `Escape` or `history.back()`, pinch-and-drag → pointer events (opt-in). That is a richer input surface than a native DAT 0.9 app (onClick only) — useful as a comparison point.
-- Patterns from CONDUCTOR: ignore key auto-repeat and duplicates within 80 ms; when a popup opens, push exactly one history entry so a system Back closes the popup instead of the app; pure black background (additive display); cap canvas drawing at ~30 fps to leave CPU for audio; create the AudioContext only inside a gesture handler.
+To build a Web App, use Meta's plugin skills first: `meta-wearables-webapp:ai-glasses-webapp-build` + `-ui` (UI Toolkit, React/Vite/TS, npm with a committed `package-lock.json`), `-device` (inputs, sensors), `-test` (the quality gate), `-optimize-performance`, `-publish` only on request; games: `meta-wearables-webapp-game:*`; docs: `search_webapps_docs`. This section only adds CONDUCTOR's notes (a custom canvas UI without the Toolkit).
+
+- Per Meta's Web App docs (*not device-verified by us*): pinch → `Enter`, thumb swipes → arrow keys, Back → `Escape` or `history.back()`, pinch-and-drag → pointer events (opt-in). That is a richer input surface than a native DAT 0.9 app (onClick only; DAT 1.0 adds Nav/Select/Drag through the inputs capability) — useful as a comparison point.
+- Patterns from CONDUCTOR (custom key handlers, no Toolkit): ignore key auto-repeat and duplicates within 80 ms — never on Toolkit `Button`s (one `onClick`, no time-based debounce, per Meta `-device`); when a popup opens, push exactly one history entry so a system Back closes the popup instead of the app; pure black page background (additive display; Toolkit apps use `--uit-color-background-window`), cards dark gray, never `#000`; cap canvas drawing at ~30 fps to leave CPU for audio; create the AudioContext only inside a gesture handler.
 - Meta's FAQ mentions "wrist motion from the Meta Neural Band" under Web Apps only; untested.
 
-## Off-device verification (no Gradle in the sandbox)
+## Off-device verification
+
+In Claude Code on the school PC, build with the project wrapper (`.\gradlew.bat :app:compileDebugKotlin`, `:app:testDebugUnitTest`). The stub-compiler route below is for Claude.ai/Cowork sandboxes without Gradle. SDK API detail beyond these device facts: `mwdat-android:display-access`, `inputs`, `camera-streaming`, `session-lifecycle`, `mockdevice-testing`.
 
 - Kotlin CLI compiler (same version as the project) with the Compose and serialization compiler plugins, classpath = `android.jar` + the real AAR `classes.jar` files from the Gradle cache (DAT, Compose, ML Kit …) + small stubs (`BuildConfig`, `R`). Compile the whole app, not single files.
 - Check SDK identifiers with `javap` on the jar (enums, parameter types); a compile against the real jar also checks named parameters.
@@ -299,7 +306,7 @@ through real-device measurements first.
 
 ## Development documentation
 
-After every verified milestone, update PROJECT_HISTORY.md.
+After every verified milestone, update the project's history/devlog per `plan-approve-build-loop` §6 (Fridge: `docs/PROJECT_HISTORY.md`; LiftLens: `DEVLOG_<date>.md`).
 
 Record:
 - Features implemented.
@@ -318,6 +325,8 @@ but what technical or interaction-design question the
 experiment helped answer.
 
 ## Changelog
+
+- 2026-10-06 (b): cross-check with Meta plugins — explicit input sources, release-channel gating, Developer Mode `"0"`, `removeCamera()`, Web App routing to Meta's plugin, per-project Gradle/AGP, Windows notes for plugin scripts, plugin cross-references.
 
 - 2026-10-06: hackix26 hardware results (session, camera stream + release order, Motion probe, band and temple inputs, MediaPipe numbers, SERVICE_NOT_FOUND incident); Neural Band subscription results reconciled (10/2 vs 10/3) under "a subscribed source is taken from the UI"; setup minimums, Developer Mode, JDK 21 for Gradle 8.13, Meta's Claude plugin; Web App inputs from CONDUCTOR.
 - 2026-10-05: Back behaviour turned into a Back check instead of a fixed rule.

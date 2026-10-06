@@ -1,6 +1,6 @@
 ---
 name: "evidence-and-claims"
-description: "Use whenever Hyun's work turns into words other people will read or hear: research briefs, pitch decks, capstone proposals and midterm/final presentations, case studies, release notes, README and status docs, demo videos, LinkedIn posts, team docs. Covers how to source and re-check claims, how to state build/test status honestly, say/don't-say wording, health and wellbeing copy, and keeping docs in sync. Use it even for a single slide or caption that states what a product does, how well it works or what research shows."
+description: "Use when Hyun's work becomes words others read or hear: research briefs, pitch decks, capstone presentations, case studies, release notes, README/status docs, demo videos, posts. Sourcing, honest build/test status, say/don't-say, health copy."
 ---
 
 # Evidence and claims

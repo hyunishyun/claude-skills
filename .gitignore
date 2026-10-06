@@ -5,3 +5,6 @@ Thumbs.db
 
 # managed by the Claude desktop app, not part of this repo
 synced/
+
+# installed by tools (Meta UI Toolkit, android skills add), not part of this repo
+wearables-ui-toolkit-web/

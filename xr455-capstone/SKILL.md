@@ -1,6 +1,6 @@
 ---
 name: "xr455-capstone"
-description: "Use for anything about Hyun's SCAD XR 455 capstone (Fall 2026 – Spring 2027): the all-day smart-glasses question, the Fall/Winter/Spring roadmap, the Fall proof-of-concept scope (LiftLens + Production HUD on one Context Engine), the week-by-week timeline, progress checks against it, midterm/final presentations, PoC document updates, and which results from other projects (Fridge Assistant, HackIX, CONDUCTOR) the capstone can reuse. Use it whenever Hyun mentions the capstone, 캡스톤, PoC, midterm, pitch deck, roadmap or asks how far along he is."
+description: "Use for Hyun's SCAD XR 455 capstone (all-day smart glasses, Fall 2026 – Spring 2027): roadmap, Fall PoC scope (LiftLens + Production HUD, Context Engine), weekly timeline, progress checks, midterm/final presentations, reuse from other projects. 캡스톤, PoC."
 ---
 
 # XR 455 Capstone — Hyun Ha (SCAD BFA Immersive Reality)
@@ -67,7 +67,7 @@ Order inversion to watch: features (Program model, Fridge, HackIX experiments) r
 - **PoC slide 8 claims, now with evidence:** head nod = glasses IMU at 60 Hz works, gesture itself untested; "pause workout when glasses come off" = wear state is tracked in hackix26; hands-free "log set" = English only; "Hey Meta" launch = needs a Developer Center permission, untried; ActionRole.PRIMARY = measure it (test idea: make sticky ± keep a fixed button order and move PRIMARY to the last-pressed button instead of reordering).
 - **Ticking screens after migration:** SDK `text` flickers on resend in 1.0 (Bee There) — check the rest-timer screen in the regression.
 - **Neural Band:** gives apps gestures, not wrist motion; band presses cards natively when the app does not subscribe it.
-- **CONDUCTOR:** comparison point for the input-constraint argument (Web App gets pinch/swipes/drag as key and pointer events vs native 0.9 onClick only), a gesture-onboarding step before playtests (W9), and a cue/conductor narrative link to Production HUD.
+- **CONDUCTOR:** comparison point for the input-constraint argument (Web App gets pinch/swipes/drag as key and pointer events vs native DAT 0.9 onClick only; DAT 1.0 adds Nav/Select/Drag), a gesture-onboarding step before playtests (W9), and a cue/conductor narrative link to Production HUD.
 
 ## PoC document items that are out of date
 

@@ -1,11 +1,13 @@
 ---
 name: "plan-approve-build-loop"
-description: "Use for any coding or build session with Hyun (Android / glasses / web, solo or team repos, Claude.ai, Cowork or Claude Code): plan in Korean and wait for approval, batch stages, verify off-device, stage/commit files, hand over a device test checklist and a Git commit, write dev logs and status docs from the repo, write handoffs, and harvest what was learned into the skills. Also use when Hyun asks to update, check, review or reorganise his skills (스킬 업데이트 / 스킬 확인)."
+description: "Use for any coding session with Hyun (Android, glasses, web; solo or team). Hyun layer on top of superpowers: 한국어 요약, PowerShell guidance, off-device verification, device test checklist, commit style, dev logs, handoffs, skill harvest (스킬 업데이트 / 스킬 확인)."
 ---
 
 # Plan → approve → build → verify → device test → commit
 
 Working agreement with Hyun (SCAD BFA Immersive Reality). Conversation and plans in **Korean**; code, comments, commit messages, dev logs, status docs and skill files in English. Messages for English-speaking teammates: English, ready to paste.
+
+**With superpowers (Claude Code, since 2026-10-06):** Hyun chose the superpowers workflow as the process. `brainstorming` and `writing-plans` are the plan step, their gates are the approval step, `executing-plans` / `subagent-driven-development` build, `verification-before-completion` and `finishing-a-development-branch` close. This skill then only adds what superpowers does not know: sections 0, 2 (superpowers bullet), 3, 4–7, status docs, team repos, handoffs and lessons — skipping bullets marked [Claude.ai/Cowork]. Standing answers to superpowers' questions (worktrees, TDD exceptions, finish order, commit style) are in `user-instructions.md`. Every spec and plan starts with a `## 한국어 요약` (see `~/.claude/skills/user-instructions.md`). **Without superpowers** (Claude.ai, Cowork): follow sections 1–5 as written.
 
 ## 0. Working with Hyun
 
@@ -18,14 +20,15 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Conversation and plans
 
 ## 1. Inspect before planning
 
-- Stage the current files from the device and diff them against the last copy you wrote; never plan from memory. Read `.git/HEAD` and `.git/logs/HEAD` to confirm the branch, last commit and that the tree is clean.
+- [Claude.ai/Cowork] Stage the current files from the device and diff them against the last copy you wrote; never plan from memory. Read `.git/HEAD` and `.git/logs/HEAD` to confirm the branch, last commit and that the tree is clean.
 - State "confirmed current behaviour" separately from "proposed changes" and from "decisions that need Hyun's call".
 
 ## 2. Plan, then wait
 
+- With superpowers: the spec and plan *are* the plan. Put the D1, D2… decisions and the commit message in the 한국어 요약, show that summary in the chat, and let superpowers' gates do the waiting.
 - Explain what will change, why, which files, the state transitions/rules, tests, and the commit message. List open decisions as D1, D2… with a recommendation each.
 - **Wait for explicit approval** ("승인", "go", "통과") before touching code.
-- Hyun asked for **fewer checkpoints**: when several stages can be built and tested together safely, propose one round covering them (e.g. models + persistence) and say why. Detailed staged explanations are welcome; staged approvals are not.
+- Hyun asked for **fewer checkpoints**: when several stages can be built and tested together safely, propose one round covering them (e.g. models + persistence) and say why. Detailed staged explanations are welcome; staged approvals are not. With superpowers, its required gates stay; where it leaves a choice (task classification, how many design sections, execution approach), pick the option with the fewest stops that is still honest.
 - Be proactive: say when a better structure exists than the one requested, and recommend it with reasons. Hyun wants to hear it.
 - Respect stated constraints literally (e.g. "planning only, no file changes", "do not move X", "schema belongs to a later stage").
 
@@ -33,19 +36,22 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Conversation and plans
 
 - Additive changes with defaults so untouched files keep compiling. Keep public APIs stable across refactors; check parity wrapper-by-wrapper.
 - No new dependencies unless approved. Keep the Meta sample's session/display lifecycle untouched.
-- File tools cannot move/rename files; ask Hyun to do that in Android Studio.
+- [Claude.ai/Cowork] File tools cannot move/rename files; ask Hyun to do that in Android Studio.
+- **Worktrees vs Android Studio:** Hyun builds and installs from the folder open in Android Studio, so Android work happens on a branch in the main checkout (no worktree; see `user-instructions.md`). If a web-only repo uses a worktree, tell him in Korean which folder to open before any test.
 
 ## 4. Verify off-device (Hyun cannot see your work run)
 
 - SDK identifiers: check against the real enum (sample code or APK DEX dump) — never guess.
-- Type-check with the exact Kotlin CLI compiler version (GitHub releases work when Maven is blocked) against minimal stubs; run stateful logic through a simulation (double presses, process kill/restore, schema migrations, boundaries).
+- In Claude Code, compile and test with the real build: `.\gradlew.bat :app:compileDebugKotlin` / `:app:testDebugUnitTest` (or through chrisbanes `gradle-run` with `gradlew.bat`).
+- [Claude.ai/Cowork] Type-check with the exact Kotlin CLI compiler version (GitHub releases work when Maven is blocked) against minimal stubs; run stateful logic through a simulation (double presses, process kill/restore, schema migrations, boundaries).
 - Scan for bracket balance, unused/duplicate imports, `continue` inside lambdas, and any line the UI reads that the change could break.
 
 ## 5. Deliver
 
-- Write back via the device bridge with `expectedMtimeMs` from the staging step so Hyun's edits are never overwritten. Also send the files into the chat.
-- Give a **device test checklist** (numbered, with what to look for in Logcat and on the glasses) and the exact `git add … && git commit -m "Area: what changed"` command. Before a schema change, ask for an `adb run-as … cat` backup of the data file.
-- Commit message style: `Sessions: glasses session screens`, `Programs: … and history schema v3`.
+- [Claude.ai/Cowork] Write back via the device bridge with `expectedMtimeMs` from the staging step so Hyun's edits are never overwritten. Also send the files into the chat.
+- Give a **device test checklist** (numbered, with what to look for in Logcat and on the glasses), before `finishing-a-development-branch`, and wait for the results. In Claude Code, Claude makes the commits; give Hyun only the commands he runs himself (push, branch switch), one per line, never `&&` (PowerShell 5.1). In Claude.ai/Cowork, give the `git add` and `git commit -m "Area: what changed"` commands on separate lines.
+- Before a schema change, ask for a backup of the data file: `& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" exec-out run-as <package> cat files/<file> > backup.json`.
+- Commit message style: `Sessions: glasses session screens`, `Programs: … and history schema v3`. Use the repo's existing style over skill examples (superpowers plans show `feat: …`; Hyun's repos use `Area: what changed`). Team repos that already use Conventional Commits keep them.
 
 ## 6. Dev log
 
@@ -60,9 +66,11 @@ After the device checklist comes back, before moving on, add a short **"Skill ha
 - Design rules or workflow habits that saved or cost time.
 - Target skill for each item: general SDK facts → `ray-ban-display-app-dev`; screen rules → `glasses-hud-design-rules`; how we work → this skill; event/sprint process → `hackathon-sprint-playbook`; research, pitch and public wording → `evidence-and-claims`; capstone scope and progress → `xr455-capstone`; project paths/state → the project skill.
 
+Harvest edits are fact/rule updates: from superpowers `writing-skills` apply only the frontmatter, description and size rules. Third-party skills installed by tools (e.g. `wearables-ui-toolkit-web`) are gitignored, not harvested.
+
 When Hyun says "스킬 업데이트" (or approves the harvest), write the edited SKILL.md files (whole files, with a dated `## Changelog` line), keep each under ~500 lines, and move long detail into `references/`. Project-specific state never goes into the general skills.
 
-**Where the skills live:** Hyun's private GitHub repo `claude-skills` is the source of truth (one folder per skill + `README.md` + `KNOWLEDGE_LOG.md`). After an update: commit there, re-upload the changed zips to Claude.ai, `git pull` in `~/.claude/skills` for Claude Code. When he says "스킬 확인", compare the installed copies (`/mnt/skills/...` in Claude.ai) with the repo version and list what is stale or missing — installed copies are loaded when a chat starts, so changes show up only in a new chat.
+**Where the skills live:** Hyun's private GitHub repo `claude-skills` is the source of truth (one folder per skill + `README.md` + `KNOWLEDGE_LOG.md`). After an update: commit there, re-upload the changed zips to Claude.ai, `git pull` in `~/.claude/skills` for Claude Code. When he says "스킬 확인", compare the installed copies (Claude.ai: `/mnt/skills/...`; this PC's desktop-app cache: `%APPDATA%\Claude\local-agent-mode-sessions\skills-plugin\<id>\<id>\skills\`, shown in Claude Code as `anthropic-skills:<name>`) with the repo version and list what is stale or missing — installed copies are loaded when a chat starts, so changes show up only in a new chat.
 
 ## Status doc format (one per round, e.g. `round4-status.md`)
 
@@ -98,5 +106,6 @@ When a session is close to its usage limit or work moves to another person's Cla
 
 ## Changelog
 
+- 2026-10-06 (b): superpowers leads the process in Claude Code; this skill is the Hyun layer (한국어 요약, worktree note, commit style).
 - 2026-10-06: section 0 (working with Hyun), step 7 extended (skills repo, 스킬 확인, new target skills), team-repo and handoff sections, HackIX 2026 lessons.
 - 2026-10-05: step 7 (skill harvest), status doc format, HackIX lessons.
