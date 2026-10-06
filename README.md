@@ -20,6 +20,18 @@ Dated history and conflict decisions: `KNOWLEDGE_LOG.md`.
 
 Rule of thumb: facts that hold for every glasses app go in a general skill; paths, decisions and state go in a project skill. Two device results that disagree are both kept, with date and app, plus the safe rule.
 
+### Third-party: Anthony Fu's skills (web stack)
+
+Copied unchanged on 2026-10-06 from [antfu/skills](https://github.com/antfu/skills) (MIT, © Anthony Fu — `LICENSE.md` in each folder). Don't edit these here; to update, download the repo again and replace the folders.
+
+| Skill | Use for |
+| --- | --- |
+| `antfu` | Anthony Fu's JS/TS tooling conventions (ESLint config, pnpm, monorepos, library publishing) |
+| `antfu-create-pr` | Opening a GitHub PR: Conventional Commits title, evidence-based body, before/after screenshots |
+| `vue`, `nuxt`, `pinia`, `nitro` | Vue 3, Nuxt, Pinia state, Nitro server toolkit |
+| `vite`, `vitest`, `vitepress` | Vite build/config, Vitest tests, VitePress docs sites |
+| `unocss`, `pnpm` | UnoCSS atomic CSS, pnpm workspaces and catalogs |
+
 ## Set up (once)
 
 All commands are for **Windows PowerShell**.
