@@ -94,8 +94,9 @@ If `.claude\skills` doesn't exist yet, a plain `git clone https://github.com/hyu
 
 **Claude.ai** (also used by the desktop app's chat): Settings → Capabilities → Skills → upload each changed skill as a zip of its folder, replacing the old one. Upload only Hyun's 9 skills there (not the third-party ones — they would crowd the description budget). Make a zip with:
 ```powershell
-Compress-Archive "$env:USERPROFILE\.claude\skills\<skill-name>" "$env:USERPROFILE\Downloads\<skill-name>.zip" -Force
+tar.exe -a -c -f "$env:USERPROFILE\Downloads\<skill-name>.zip" -C "$env:USERPROFILE\.claude\skills" <skill-name>
 ```
+Don't use `Compress-Archive` in Windows PowerShell 5.1: it writes `\` into zip paths and Claude.ai rejects the zip ("Zip file contains path with invalid characters").
 
 On shared PCs, clear `git:https://github.com` from Windows Credential Manager when you leave.
 
