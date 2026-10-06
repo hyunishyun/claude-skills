@@ -32,6 +32,36 @@ Copied unchanged on 2026-10-06 from [antfu/skills](https://github.com/antfu/skil
 | `vite`, `vitest`, `vitepress` | Vite build/config, Vitest tests, VitePress docs sites |
 | `unocss`, `pnpm` | UnoCSS atomic CSS, pnpm workspaces and catalogs |
 
+### Third-party: Android / Kotlin / debugging (for the glasses apps' phone side)
+
+Copied unchanged on 2026-10-06; each folder keeps its source license as `LICENSE.source`. Don't edit these here; to update, download the source repo again and replace the folder.
+
+| Skill | Source (license) | Use for |
+| --- | --- | --- |
+| `android-cli` | [android/skills](https://github.com/android/skills) @42dc227 (Apache-2.0, Google) | Google's `android` CLI: devices, install/run, screenshots, UI interaction from the terminal |
+| `android-profiler` | android/skills | Perfetto trace recording and analysis: jank, CPU, memory, power |
+| `testing-setup` | android/skills | Test strategy and setup: unit, Compose UI, screenshot tests, Hilt testing |
+| `camerax` | android/skills | Phone camera with CameraX (lifecycle, low light, thermals, ML Kit) |
+| `ml-kit-genai-prompt-api` | android/skills | On-device Gemini Nano via ML Kit Prompt API: prompts, structured output |
+| `android-permissions-security` | android/skills | Manifest permissions and exported-component audit |
+| `kotlin-concurrency-and-flow` | [chrisbanes/skills](https://github.com/chrisbanes/skills) @f872f97 (Apache-2.0) | Coroutine scope ownership, cancellation, StateFlow/SharedFlow |
+| `compose-state-and-effects` | chrisbanes/skills | Compose state hoisting, `LaunchedEffect`/`DisposableEffect`, Flow collection |
+| `compose-ui-testing-patterns` | chrisbanes/skills | Compose UI and screenshot tests, semantics assertions |
+| `systematic-debugging` | [obra/superpowers](https://github.com/obra/superpowers) @8ca22db (MIT) | Root cause first: reproduce, trace, one hypothesis at a time |
+| `verification-before-completion` | obra/superpowers | Run the check and read its output before saying "done" |
+
+### Plugins (installed through Claude Code, not stored in this repo)
+
+Re-run after a PC reset:
+```powershell
+claude plugin marketplace add facebook/meta-wearables-dat-android
+claude plugin install mwdat-android@mwdat-android-marketplace --scope user
+claude plugin marketplace add facebook/meta-wearables-webapp
+claude plugin install meta-wearables-webapp@meta-wearables --scope user
+```
+- `mwdat-android` (Meta): DAT SDK for Android — session, display, inputs, camera, speech, motion, MockDevice, debugging.
+- `meta-wearables-webapp` (Meta): Ray-Ban Display **Web Apps** — build, UI Toolkit, on-device testing, performance, publish, WebMCP. Same marketplace also has `meta-wearables-webapp-game` (Three.js games), not installed.
+
 ## Set up (once)
 
 All commands are for **Windows PowerShell**.
