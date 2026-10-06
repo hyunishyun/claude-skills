@@ -44,6 +44,7 @@ Copied unchanged on 2026-10-06; each folder keeps its source license as `LICENSE
 | `camerax` | android/skills | Phone camera with CameraX (lifecycle, low light, thermals, ML Kit) |
 | `ml-kit-genai-prompt-api` | android/skills | On-device Gemini Nano via ML Kit Prompt API: prompts, structured output |
 | `android-permissions-security` | android/skills | Manifest permissions and exported-component audit |
+| `agp-9-upgrade` | android/skills | Moving a project to Android Gradle Plugin 9 (only when upgrading) |
 | `kotlin-concurrency-and-flow` | [chrisbanes/skills](https://github.com/chrisbanes/skills) @f872f97 (Apache-2.0) | Coroutine scope ownership, cancellation, StateFlow/SharedFlow |
 | `compose-state-and-effects` | chrisbanes/skills | Compose state hoisting, `LaunchedEffect`/`DisposableEffect`, Flow collection |
 | `compose-ui-testing-patterns` | chrisbanes/skills | Compose UI and screenshot tests, semantics assertions |
@@ -58,9 +59,11 @@ claude plugin marketplace add facebook/meta-wearables-dat-android
 claude plugin install mwdat-android@mwdat-android-marketplace --scope user
 claude plugin marketplace add facebook/meta-wearables-webapp
 claude plugin install meta-wearables-webapp@meta-wearables --scope user
+claude plugin install meta-wearables-webapp-game@meta-wearables --scope user
 ```
 - `mwdat-android` (Meta): DAT SDK for Android — session, display, inputs, camera, speech, motion, MockDevice, debugging.
-- `meta-wearables-webapp` (Meta): Ray-Ban Display **Web Apps** — build, UI Toolkit, on-device testing, performance, publish, WebMCP. Same marketplace also has `meta-wearables-webapp-game` (Three.js games), not installed.
+- `meta-wearables-webapp` (Meta): Ray-Ban Display **Web Apps** — build, UI Toolkit, on-device testing, performance, publish, WebMCP. 
+- `meta-wearables-webapp-game` (Meta): Web App **games** for the glasses (Vite + TypeScript + Three.js): create, iterate with frame stats, validate, logging, game director critique.
 
 ## Set up (once)
 
