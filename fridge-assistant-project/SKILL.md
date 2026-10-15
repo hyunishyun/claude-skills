@@ -5,7 +5,7 @@ description: "Use when working on Fridge Assistant (Android app for Meta Ray-Ban
 
 # Fridge Assistant — project context
 
-Portfolio app for US companies (UI and code in English; conversation with Hyun in Korean). Kotlin + Jetpack Compose (Material 3), Meta Wearables DAT SDK 1.0.0. Independent of LiftLens / Production HUD (do not touch those). In the XR 455 capstone it is outside the Fall core but appears as the W8 item (camera frames + photo capture), which it already exceeds; its results feed `xr455-capstone`. Public wording: `evidence-and-claims`.
+Portfolio app for US companies (UI and code in English; chat language per `user-instructions.md`). Kotlin + Jetpack Compose (Material 3), Meta Wearables DAT SDK 1.0.0. Independent of LiftLens / Production HUD (do not touch those). In the XR 455 capstone it is outside the Fall core but appears as the W8 item (camera frames + photo capture), which it already exceeds; its results feed `xr455-capstone`. Public wording: `evidence-and-claims`.
 
 ## Where things are
 

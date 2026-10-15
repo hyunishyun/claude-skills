@@ -7,7 +7,7 @@ description: "Use when working on LiftLens Mini / Production HUD (Meta Ray-Ban D
 
 SCAD XR 455 capstone by Hyun Ha. Two activities on one Real-Time Context Engine: **LiftLens** (sets / reps / rest / sessions / programs) and **Production HUD** (scene·shot·take, countdown, cues with roles). Built on Meta's `DisplayAccess` sample; `applicationId` unchanged (`com.meta.wearable.dat.externalsampleapps.displayaccess`).
 
-Work in Korean. Follow the `plan-approve-build-loop` and `glasses-hud-design-rules` skills. This is the core of the XR 455 Fall PoC: schedule, progress format and reuse map in `xr455-capstone`; public wording in `evidence-and-claims`.
+Chat language per `user-instructions.md`. Follow the `plan-approve-build-loop` and `glasses-hud-design-rules` skills. This is the core of the XR 455 Fall PoC: schedule, progress format and reuse map in `xr455-capstone`; public wording in `evidence-and-claims`.
 
 ## Where things are
 

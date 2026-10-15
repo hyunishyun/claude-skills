@@ -4,7 +4,7 @@ Everything learned across Hyun's projects (LiftLens / Production HUD, Fridge Ass
 
 Dated history and conflict decisions: `KNOWLEDGE_LOG.md`.
 
-**How Claude works with Hyun (Claude Code):** `user-instructions.md`, loaded by `~/.claude/CLAUDE.md` (one line: `@~/.claude/skills/user-instructions.md`). The superpowers workflow leads; Korean conversation and a `## 한국어 요약` in every spec/plan; standing answers (no worktrees for Android, TDD exceptions, finish order, commit style); stack routing; this PC's tools.
+**How Claude works with Hyun (Claude Code):** `user-instructions.md`, loaded by `~/.claude/CLAUDE.md` (one line: `@~/.claude/skills/user-instructions.md`). The superpowers workflow leads; English by default (Korean chat only on request) and a `## Summary` in every spec/plan; standing answers (no worktrees for Android, TDD exceptions, finish order, commit style); stack routing; this PC's tools.
 
 ## The skills
 
@@ -12,7 +12,7 @@ Dated history and conflict decisions: `KNOWLEDGE_LOG.md`.
 | --- | --- | --- |
 | `ray-ban-display-app-dev` | General — SDK and hardware facts | Meta Ray-Ban Display / DAT 1.0: setup, session, display, inputs, Neural Band, motion, speech, camera, on-phone vision, Web Apps, build environment, off-device verification, Figma track |
 | `glasses-hud-design-rules` | General — screen design | Rules 1–23 for glasses cards: cursor reset, ticking/animated screens, Back check, band input modes, display arbiter, nudges, quiet ends |
-| `plan-approve-build-loop` | General — how we work | Hyun layer on top of superpowers: 한국어 요약, PowerShell guidance, off-device verification, device test checklist, commit style, devlog, skill harvest; team repos; handoffs (full plan → approval loop where superpowers isn't installed) |
+| `plan-approve-build-loop` | General — how we work | Hyun layer on top of superpowers: language rule, PowerShell guidance, off-device verification, device test checklist, commit style, devlog, skill harvest; team repos; handoffs; lost-session recovery (full plan → approval loop where superpowers isn't installed) |
 | `hackathon-sprint-playbook` | General — process | Hackathons, sprints, crits: prep, brief, concepts, survey, team contracts, integration, rounds, inclusive checklist, demo video, release |
 | `evidence-and-claims` | General — words | Research briefs, pitches, presentations, release notes, posts: status words, sourcing, say / don't say, health copy, doc sync |
 | `xr455-capstone` | Project | Capstone question, roadmap, Fall PoC scope and timeline, progress format, reuse map |

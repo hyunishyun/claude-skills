@@ -1,13 +1,13 @@
 ---
 name: "plan-approve-build-loop"
-description: "Use for any coding session with Hyun (Android, glasses, web; solo or team). Hyun layer on top of superpowers: 한국어 요약, PowerShell guidance, off-device verification, device test checklist, commit style, dev logs, handoffs, skill harvest (스킬 업데이트 / 스킬 확인)."
+description: "Use for any coding session with Hyun (Android, glasses, Unity, web; solo or team). Hyun layer on top of superpowers: language rule, PowerShell guidance, off-device verification, device test checklist, commit style, dev logs, handoffs, session recovery, skill harvest (update skills / check skills, 스킬 업데이트)."
 ---
 
 # Plan → approve → build → verify → device test → commit
 
-Working agreement with Hyun (SCAD BFA Immersive Reality). Conversation and plans in **Korean**; code, comments, commit messages, dev logs, status docs and skill files in English. Messages for English-speaking teammates: English, ready to paste.
+Working agreement with Hyun (SCAD BFA Immersive Reality). Language follows `user-instructions.md` (since 2026-10-14): chat in English unless Hyun asks for Korean in that session; every file — specs, plans, code, commits, docs, skills — in English. Messages for English-speaking teammates: English, ready to paste.
 
-**With superpowers (Claude Code, since 2026-10-06):** Hyun chose the superpowers workflow as the process. `brainstorming` and `writing-plans` are the plan step, their gates are the approval step, `executing-plans` / `subagent-driven-development` build, `verification-before-completion` and `finishing-a-development-branch` close. This skill then only adds what superpowers does not know: sections 0, 2 (superpowers bullet), 3, 4–7, status docs, team repos, handoffs and lessons — skipping bullets marked [Claude.ai/Cowork]. Standing answers to superpowers' questions (worktrees, TDD exceptions, finish order, commit style) are in `user-instructions.md`. Every spec and plan starts with a `## 한국어 요약` (see `~/.claude/skills/user-instructions.md`). **Without superpowers** (Claude.ai, Cowork): follow sections 1–5 as written.
+**With superpowers (Claude Code, since 2026-10-06):** Hyun chose the superpowers workflow as the process. `brainstorming` and `writing-plans` are the plan step, their gates are the approval step, `executing-plans` / `subagent-driven-development` build, `verification-before-completion` and `finishing-a-development-branch` close. This skill then only adds what superpowers does not know: sections 0, 2 (superpowers bullet), 3, 4–7, status docs, team repos, handoffs and lessons — skipping bullets marked [Claude.ai/Cowork]. Standing answers to superpowers' questions (worktrees, TDD exceptions, finish order, commit style) are in `user-instructions.md`. Every spec and plan starts with a `## Summary` (see `~/.claude/skills/user-instructions.md`). **Without superpowers** (Claude.ai, Cowork): follow sections 1–5 as written.
 
 ## 0. Working with Hyun
 
@@ -25,7 +25,7 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Conversation and plans
 
 ## 2. Plan, then wait
 
-- With superpowers: the spec and plan *are* the plan. Put the D1, D2… decisions and the commit message in the 한국어 요약, show that summary in the chat, and let superpowers' gates do the waiting.
+- With superpowers: the spec and plan *are* the plan. Put the D1, D2… decisions and the commit message in the `## Summary`, explain that summary in the chat, and let superpowers' gates do the waiting.
 - Explain what will change, why, which files, the state transitions/rules, tests, and the commit message. List open decisions as D1, D2… with a recommendation each.
 - **Wait for explicit approval** ("승인", "go", "통과") before touching code.
 - Hyun asked for **fewer checkpoints**: when several stages can be built and tested together safely, propose one round covering them (e.g. models + persistence) and say why. Detailed staged explanations are welcome; staged approvals are not. With superpowers, its required gates stay; where it leaves a choice (task classification, how many design sections, execution approach), pick the option with the fewest stops that is still honest.
@@ -37,7 +37,7 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Conversation and plans
 - Additive changes with defaults so untouched files keep compiling. Keep public APIs stable across refactors; check parity wrapper-by-wrapper.
 - No new dependencies unless approved. Keep the Meta sample's session/display lifecycle untouched.
 - [Claude.ai/Cowork] File tools cannot move/rename files; ask Hyun to do that in Android Studio.
-- **Worktrees vs Android Studio:** Hyun builds and installs from the folder open in Android Studio, so Android work happens on a branch in the main checkout (no worktree; see `user-instructions.md`). If a web-only repo uses a worktree, tell him in Korean which folder to open before any test.
+- **Worktrees vs Android Studio:** Hyun builds and installs from the folder open in Android Studio, so Android work happens on a branch in the main checkout (no worktree; see `user-instructions.md`). If a web-only repo uses a worktree, tell him which folder to open before any test.
 
 ## 4. Verify off-device (Hyun cannot see your work run)
 
@@ -68,9 +68,9 @@ After the device checklist comes back, before moving on, add a short **"Skill ha
 
 Harvest edits are fact/rule updates: from superpowers `writing-skills` apply only the frontmatter, description and size rules. Third-party skills installed by tools (e.g. `wearables-ui-toolkit-web`) are gitignored, not harvested.
 
-When Hyun says "스킬 업데이트" (or approves the harvest), write the edited SKILL.md files (whole files, with a dated `## Changelog` line), keep each under ~500 lines, and move long detail into `references/`. Project-specific state never goes into the general skills.
+When Hyun says "update skills" / "스킬 업데이트" (or approves the harvest), write the edited SKILL.md files (whole files, with a dated `## Changelog` line), keep each under ~500 lines, and move long detail into `references/`. Project-specific state never goes into the general skills.
 
-**Where the skills live:** Hyun's private GitHub repo `claude-skills` is the source of truth (one folder per skill + `README.md` + `KNOWLEDGE_LOG.md`). After an update: commit there, re-upload the changed zips to Claude.ai, `git pull` in `~/.claude/skills` for Claude Code. When he says "스킬 확인", compare the installed copies (Claude.ai: `/mnt/skills/...`; this PC's desktop-app cache: `%APPDATA%\Claude\local-agent-mode-sessions\skills-plugin\<id>\<id>\skills\`, shown in Claude Code as `anthropic-skills:<name>`) with the repo version and list what is stale or missing — installed copies are loaded when a chat starts, so changes show up only in a new chat.
+**Where the skills live:** Hyun's private GitHub repo `claude-skills` is the source of truth (one folder per skill + `README.md` + `KNOWLEDGE_LOG.md`). After an update: commit there, re-upload the changed zips to Claude.ai, `git pull` in `~/.claude/skills` for Claude Code. When he says "check skills" / "스킬 확인", compare the installed copies (Claude.ai: `/mnt/skills/...`; this PC's desktop-app cache: `%APPDATA%\Claude\local-agent-mode-sessions\skills-plugin\<id>\<id>\skills\`, shown in Claude Code as `anthropic-skills:<name>`) with the repo version and list what is stale or missing — installed copies are loaded when a chat starts, so changes show up only in a new chat.
 
 ## Status doc format (one per round, e.g. `round4-status.md`)
 
@@ -91,6 +91,12 @@ Branch + base commit · Flow (what the user does) · Decisions applied (D1…) �
 
 When a session is close to its usage limit or work moves to another person's Claude, write a handoff before stopping: where things are (repo, branches + state + PRs), what is built, what is device-verified vs not, decisions (approved / open, with IDs), rules that must survive a merge, build and test commands, open items with owners. Next session reads `CLAUDE.md`, then the handoff, then the newest status doc. If work restarts from an earlier known-good base, record why and what was carried over.
 
+## Lost or long sessions (2026-10-14)
+
+- The desktop app can drop sessions from its sidebar (even from the archive). The transcripts stay on disk: `~/.claude/projects/<folder-slug>/<session-id>.jsonl`, with subagent and workflow logs in the `<session-id>/` folder beside it. Reopen with `claude --resume <session-id>` from the project folder, or read the tail of the `.jsonl` to report where the work stopped.
+- To keep a session: copy the raw files to `Desktop\Hyun's Playground\session-archive\<project>\<date>_<id>\` and write a readable `transcript.md` (user and assistant text, one line per tool call). Commit only the readable part, to `docs/session-logs/`, after the project's data-policy check; raw logs hold tool output (ASL Love: dataset video names and participant IDs) and stay off git.
+- Auto mode may block a commit or push of content from a sensitive source. Stop and ask Hyun in the chat; don't work around it.
+
 ## Lessons that cost time here
 
 - The glasses cursor resets on every redraw — design for it (see `glasses-hud-design-rules`).
@@ -102,9 +108,14 @@ When a session is close to its usage limit or work moves to another person's Cla
 - Uncommitted work on a branch is not a contradiction with GitHub `main`; read `.git/HEAD` / reflog and say which ref every fact came from. A branch name can lie (`chore/dat-1.0-upgrade` still held 0.9.0): read the Gradle files.
 - Hyun-confirmed device results are reported as "Hyun reports …" with the date; Claude never writes "tested" for something it only compiled.
 - When a phone and the glasses show the same state, the engine (outside Compose) owns it; both renderers only read it. This made resume-after-close free in HackIX R4.
+- "Merged" means the branch tip is in `main`: check `git log --oneline main..<branch>` before saying so. Hand Hero PR #2 (10/12) merged `auto/2026-10-12-r9` before Z2–Z4 ran, so 11 later commits and every branch built on them stayed out of `main`.
+- Check repo visibility (`gh repo view <owner>/<repo> --json visibility`) instead of assuming: `hand-hero` was public until 10/14. Contest submissions may need it public again.
+- Unity Android dev builds are signed with a per-PC debug key: an APK built on a new PC cannot install over one from another PC. `adb pull` the app's `files/` first, then uninstall and install (wipes saved settings). A keystore committed to the project avoids it.
 - Two integration branches in parallel (hackix26 `team/one-app` and hack-ix-2026 `hyun/ailo-base`, 2026-10-04) left it unclear which build was final. Keep one integration branch and name the demo build by commit/tag.
 
 ## Changelog
+
+- 2026-10-14: language follows `user-instructions.md` (English files, `## Summary`; Korean chat only on request); lost-session recovery and archiving; lessons: "merged" check, repo visibility, Unity per-PC signing key.
 
 - 2026-10-06 (b): superpowers leads the process in Claude Code; this skill is the Hyun layer (한국어 요약, worktree note, commit style).
 - 2026-10-06: section 0 (working with Hyun), step 7 extended (skills repo, 스킬 확인, new target skills), team-repo and handoff sections, HackIX 2026 lessons.

@@ -22,6 +22,10 @@ Dated record of where the knowledge in these skills came from, which sources dis
 | 10/5 | Skills | First skill harvest (SDK facts, HUD rules 14–18, harvest step, playbook, Bee There skill); Back rule made conditional | chat "프로젝트 학습 내용 재사용 방법" |
 | 10/6 | Skills | This repo: 9 skills, hackix26 knowledge added, conflicts below settled | chat in project "Hyun's Capstone" |
 | 10/6 | Skills | Repo moved to GitHub (`~/.claude/skills`); third-party skills added (antfu, Google android/skills); plugins: Meta DAT + Web App + game, chrisbanes, superpowers. Hyun chose superpowers as the process (Korean 요약 kept). Cross-check of all skills: Web Apps routed to Meta's plugin, explicit input sources, release-channel gating, per-project Gradle/AGP, Windows tool notes, standing answers for superpowers, descriptions shortened, 5 web skills parked (description budget) | Claude Code session 10/6 |
+| 10/12–10/13 | Hand Hero (MetaAwards A_4) | Round 9 (Z0–Z4: run/comment minors, playtest kit, 4 APKs; 1731 EditMode tests) and round 10 (127 asset slots, scene groups, `_Legacy` move, `.gitattributes`); PR #2 had merged r9 before Z2, so neither is in `main`; dungeon skin on `hyun/dungeon-skin`; no headset test yet | Claude Code session 0e007893 |
+| 10/13–10/14 | ASL Love | Rounds 1–3: Massey templates 72.6%; ASL Citizen 83,399 videos, 2,731-sign Top-1 65.4%; learning mode; on-device signs on Quest (255 Unity tests, measure APK); collaborator onboarding doc; headset tests pending | Claude Code session c5a05a62, `docs/session-logs/` |
+| 10/14 | Hand Hero | Pivot spec: hand-flown 3D aerial quidditch, 3v3, 6-team tournament run (`hyun/quidditch` 944bebd); repo made private | Claude Code session 0e007893, this session |
+| 10/14 | Skills | Language rule: English by default, Korean chat on request, files always English (`## Summary` replaces `## 한국어 요약`); desktop app lost its session list — recovery steps added | this session |
 
 ## Conflict ledger
 

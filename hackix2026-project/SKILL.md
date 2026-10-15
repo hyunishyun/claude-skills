@@ -5,7 +5,7 @@ description: "Use for SCAD Hack iX 2026 work: Bee There (repo hack-ix-2026, fold
 
 # HackIX 2026 — Bee There, OCD Companion (hackix26) and Ailo
 
-SCAD Hack iX 2026, "Game Your Brain: The Bee___ Challenge" (with the SCAD Neurodiversity Office). Prompt: help students, especially neurodiverse students, navigate a moment of challenge and take one meaningful next step. Track 2 "The Moment That Matters" (proposed Challenge 5 "Reset and Re-enter"); Diversifier Award (best use of wearable technology). Deadline: deployed or archived online by **Sunday 2026-10-04, noon** (public repo, release tag, ≤ 2-minute video). Hyun = main developer and repo owner. Conversation in Korean; code, docs, commits, UI text and teammate messages in English.
+SCAD Hack iX 2026, "Game Your Brain: The Bee___ Challenge" (with the SCAD Neurodiversity Office). Prompt: help students, especially neurodiverse students, navigate a moment of challenge and take one meaningful next step. Track 2 "The Moment That Matters" (proposed Challenge 5 "Reset and Re-enter"); Diversifier Award (best use of wearable technology). Deadline: deployed or archived online by **Sunday 2026-10-04, noon** (public repo, release tag, ≤ 2-minute video). Hyun = main developer and repo owner. Chat language per `user-instructions.md`; code, docs, commits, UI text and teammate messages in English.
 
 Work loop `plan-approve-build-loop` · screens `glasses-hud-design-rules` · SDK facts `ray-ban-display-app-dev` · process `hackathon-sprint-playbook` · wording `evidence-and-claims`.
 
