@@ -102,7 +102,7 @@ On shared PCs, clear `git:https://github.com` from Windows Credential Manager wh
 
 ## Keep them alive
 
-1. At the end of every work round, Claude adds a **Skill harvest** block to the status doc (new facts with evidence labels and dates, contradictions with existing skills, target skill).
+1. During every work round, Claude fills a **Skill harvest** block in the status doc as facts turn up and finalises it at the end (new facts with evidence labels and dates, contradictions with existing skills, target skill; "none" is written too).
 2. Say **"스킬 업데이트"** → Claude rewrites the affected SKILL.md files with a dated changelog line and gives you the changed folders/zips.
 3. Copy them into `$env:USERPROFILE\.claude\skills` (or let Claude Code edit them there), then:
    ```powershell

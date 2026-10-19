@@ -26,6 +26,7 @@ Dated record of where the knowledge in these skills came from, which sources dis
 | 10/13–10/14 | ASL Love | Rounds 1–3: Massey templates 72.6%; ASL Citizen 83,399 videos, 2,731-sign Top-1 65.4%; learning mode; on-device signs on Quest (255 Unity tests, measure APK); collaborator onboarding doc; headset tests pending | Claude Code session c5a05a62, `docs/session-logs/` |
 | 10/14 | Hand Hero | Pivot spec: hand-flown 3D aerial quidditch, 3v3, 6-team tournament run (`hyun/quidditch` 944bebd); repo made private | Claude Code session 0e007893, this session |
 | 10/14 | Skills | Language rule: English by default, Korean chat on request, files always English (`## Summary` replaces `## 한국어 요약`); desktop app lost its session list — recovery steps added | this session |
+| 10/18 | Skills | Harvest from gstack (MIT, Garry Tan; 8640ab4), read against the Hand Hero cleanup rounds, ideas only: silent-run, gate-edit, sibling, safe-deletion and debugging checks, standing decisions in specs, deny-rule check, checklist sources, handoff reconcile (`plan-approve-build-loop`); rulings vs Hyun's direction, flaky tests, unattended debugging (`user-instructions.md`); history secret scan, retro format (`hackathon-sprint-playbook`). No new skill, no gstack tools | Claude Code session 10/18 |
 
 ## Conflict ledger
 

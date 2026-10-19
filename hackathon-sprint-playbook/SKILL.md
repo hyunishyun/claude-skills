@@ -61,14 +61,17 @@ Understandable · more than one way to participate · not dependent on one sense
 - Demo script: the moment, what changes, where it goes next; offline fallback (cached AI responses, bundled transcript, replayed clips through the real pipeline); rehearse clean install + reconnect; know the platform traps (a gesture that closes the app, display services failing — test the vendor sample first).
 - Demo video (≤ 2 min if required): beats with timestamps, on-screen card copy taken verbatim from the code, sources on screen, an honesty list (which beats are simulated or scripted, said on screen), a recording checklist (restore settings, phone screen on, no bystanders in camera view), a backup take.
 - Release: make the repo public only after an audit (no secrets, keys, test media, licensed art, personal emails in commit metadata), decide a LICENSE, match `versionName`/`versionCode` to the tag, build any public APK with empty credentials, check SDK redistribution terms, and write release notes with "Verified on hardware" and "Not yet tested" as separate sections.
+  - The audit covers the history, not only the tree. Claude runs it in Git Bash and lists commits and file names, never the values: `git log --all -G "AIza[0-9A-Za-z_-]{35}|ghp_|github_pat_|sk-ant-|BEGIN [A-Z ]*PRIVATE KEY" --oneline --name-only` and `git log --all --oneline --name-only -- "*.keystore" "*.jks" "*local.properties" "*google-services.json" "*.env"`. A match is a candidate; never test a key against its provider.
+  - A real credential that was ever committed gets revoked or rotated, even when a later commit deleted it. Rewriting history is optional cleanup, never the fix.
 - Archived version: demo video + clickable web prototype of the key screens, published before the deadline, with disclosures.
 
 ## After the event
 
-Write a short retrospective, record which build/tag was actually submitted, then run the skill harvest (`plan-approve-build-loop` step 7) so the next project starts from what this one proved.
+Write a short retrospective in which every win and every improvement points to a commit, file or device/playtest result (Hyun's own feedback counts), and every improvement names the file, script or check that will change, so the next status doc's "Carried over" line can score it; cut empty sections. Record which build/tag was actually submitted, then run the skill harvest (`plan-approve-build-loop` step 7) so the next project starts from what this one proved.
 
 ## Changelog
 
+- 2026-10-18: release audit scans git history; retrospective points every item to evidence. Ideas adapted from gstack (MIT, Garry Tan).
 - 2026-10-06 (b): rounds map to one superpowers cycle; a round ends in a merged branch.
 
 - 2026-10-06: team setup, integration (one branch, Story-mode fallback, restart from base), research brief, demo video, release audit, usage-limit handoffs — from hackix26 / OCD Companion docs.

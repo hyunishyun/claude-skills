@@ -26,6 +26,8 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Language follows `user
 ## 2. Plan, then wait
 
 - With superpowers: the spec and plan *are* the plan. Put the D1, D2… decisions and the commit message in the `## Summary`, explain that summary in the chat, and let superpowers' gates do the waiting.
+  - Standing decisions and freezes (linked memory files, the project's decisions/questions files, the project skill) go word for word into the spec's constraints, so the plan's Global Constraints carry them; subagents get at most the MEMORY.md index. A spec line that would change one goes under Risks.
+  - Before an unattended run, check the deny rules: each matches one shell and one spelling, so mirror every `Bash(...)` deny as `PowerShell(...)` and add `git -C * push *` / `git -c * push *`. `Edit(...)` denies don't stop Unity, git or Python subprocesses (Claude Code permissions doc, 2026-10-18). Show Hyun the exact lines before changing settings.
 - Explain what will change, why, which files, the state transitions/rules, tests, and the commit message. List open decisions as D1, D2… with a recommendation each.
 - **Wait for explicit approval** ("승인", "go", "통과") before touching code.
 - Hyun asked for **fewer checkpoints**: when several stages can be built and tested together safely, propose one round covering them (e.g. models + persistence) and say why. Detailed staged explanations are welcome; staged approvals are not. With superpowers, its required gates stay; where it leaves a choice (task classification, how many design sections, execution approach), pick the option with the fewest stops that is still honest.
@@ -45,11 +47,17 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Language follows `user
 - In Claude Code, compile and test with the real build: `.\gradlew.bat :app:compileDebugKotlin` / `:app:testDebugUnitTest` (or through chrisbanes `gradle-run` with `gradlew.bat`).
 - [Claude.ai/Cowork] Type-check with the exact Kotlin CLI compiler version (GitHub releases work when Maven is blocked) against minimal stubs; run stateful logic through a simulation (double presses, process kill/restore, schema migrations, boundaries).
 - Scan for bracket balance, unused/duplicate imports, `continue` inside lambdas, and any line the UI reads that the change could break.
+- **A silent run is not a pass.** A lane whose plan step runs tests and ran 0 has failed. Verification gives `tests ran N (base M), skipped S (base S0), deleted K` from the result files (Unity NUnit XML; Android `TEST-*.xml` after `--rerun`, since an UP-TO-DATE or FROM-CACHE task leaves old files). A reviewer that returned nothing is missing coverage, and a finding with no verdict stays open.
+- **Gate edits:** list each hunk that weakens a check (deleted or skipped test, looser assertion, tolerance or timeout, suppressed warning, empty `catch`, edited baseline, approved spec/plan line changed later). Restoring it is a normal fix and a test deleted with its code is fine; keeping any other relaxation needs Hyun (unattended: open).
+- Before fixing a confirmed finding, search for its siblings (same symbol, string, enum value, call shape) and fix the in-scope ones with it; in an SDD / executing-plans task, those outside the task's files go to the ledger. If one of two mirrored paths changes (two aim modes, phone/glasses renderers, a log writer/reader), check the other.
+- Before deleting, renaming or merging code, read every caller; a missing grep hit is only a lead. Unity: search scene/prefab/asset YAML for the `.meta` GUID and `m_MethodName`, and check `SendMessage` / `Invoke` / `StartCoroutine` strings; renamed serialized fields get `[FormerlySerializedAs]`; serialized enums append (renumber only when every stored value is regenerated or migrated). Android: manifest, XML `onClick`, reflection, R8 keep rules.
+- Debugging: first read what earlier rounds found about the same files or symptom (device-log analyses, known issues, review findings, `git log --oneline -- <file>`). Search the web by framework + version + error class, never with paths, account names, App IDs or keys.
 
 ## 5. Deliver
 
 - [Claude.ai/Cowork] Write back via the device bridge with `expectedMtimeMs` from the staging step so Hyun's edits are never overwritten. Also send the files into the chat.
 - Give a **device test checklist** (numbered, with what to look for in Logcat and on the glasses), before `finishing-a-development-branch`, and wait for the results. In Claude Code, Claude makes the commits; give Hyun only the commands he runs himself (push, branch switch), one per line, never `&&` (PowerShell 5.1). In Claude.ai/Cowork, give the `git add` and `git commit -m "Area: what changed"` commands on separate lines.
+- Checklist items also come from what off-device checks faked (synthetic input, a fake room, MockDevice, mocked providers), undeclared behaviour changes and parked bugs (what to capture, where it shows). Measured items (thresholds, detection rates) fix the pass bar, decoys (inputs to reject) and held-out recordings before the test; moving a bar after seeing data makes a new test, and held-out results are reported apart.
 - Before a schema change, ask for a backup of the data file: `& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" exec-out run-as <package> cat files/<file> > backup.json`.
 - Commit message style: `Sessions: glasses session screens`, `Programs: … and history schema v3`. Use the repo's existing style over skill examples (superpowers plans show `feat: …`; Hyun's repos use `Area: what changed`). Team repos that already use Conventional Commits keep them.
 
@@ -57,9 +65,9 @@ Working agreement with Hyun (SCAD BFA Immersive Reality). Language follows `user
 
 On request, write `DEVLOG_<date>.md`: what changed and why, confirmed facts learned from the code/hardware, files touched (and untouched), design rules added, open items. Take commit counts and names from the reflog, not from memory; correct earlier logs when they were wrong.
 
-## 7. Harvest learnings into skills (end of every round)
+## 7. Harvest learnings into skills (every round)
 
-After the device checklist comes back, before moving on, add a short **"Skill harvest"** block to the round's status doc / reply:
+Fill a short **"Skill harvest"** block in the round's status doc / reply as facts turn up (a session can end at a usage limit before the checklist returns), and finalise it after the device checklist comes back, before moving on; "none" is a written result:
 
 - New hardware or SDK facts, each labelled [DEVICE] / [JAR] / [SAMPLE] / [SIMULATED] / [UNVERIFIED] with SDK, firmware, phone, date.
 - Facts that **contradict** an existing skill (quote the old line, give the new one). Contradictions win over additions; never leave both — unless two device results genuinely differ by project or configuration, then keep both with date and app and state the safe rule.
@@ -74,7 +82,7 @@ When Hyun says "update skills" / "스킬 업데이트" (or approves the harvest)
 
 ## Status doc format (one per round, e.g. `round4-status.md`)
 
-Branch + base commit · Flow (what the user does) · Decisions applied (D1…) · Device results with labels · Known issues · Code (new / changed files) · Verification (compile, tests, device as separate lines) · Next · Skill harvest.
+Branch + base commit · Flow (what the user does) · Decisions applied (D1…) · Carried over: N of M addressed (last round's Next, known issues, deferred items) · Device results with labels · Known issues · Code (new / changed files) · Verification (compile, test count from §4, device as separate lines) · Gate edits: none | count + open items · Undeclared behaviour changes: none | list (file, old → new) · Challenges to your direction (when any) · Next · Skill harvest. Where the project keeps a questions or decisions file, point to it instead of copying it.
 
 ## Team repos (HackIX 2026 lessons)
 
@@ -89,7 +97,9 @@ Branch + base commit · Flow (what the user does) · Decisions applied (D1…) �
 
 ## Handoffs (usage limits, new sessions, other accounts)
 
-When a session is close to its usage limit or work moves to another person's Claude, write a handoff before stopping: where things are (repo, branches + state + PRs), what is built, what is device-verified vs not, decisions (approved / open, with IDs), rules that must survive a merge, build and test commands, open items with owners. Next session reads `CLAUDE.md`, then the handoff, then the newest status doc. If work restarts from an earlier known-good base, record why and what was carried over.
+When a session is close to its usage limit or work moves to another person's Claude, write a handoff before stopping: where things are (repo, branches + state + PRs), what is built, what is device-verified vs not, decisions (approved / open, with IDs), what was ruled out (what, why, evidence), rules that must survive a merge, build and test commands, open items with owners. Next session reads `CLAUDE.md`, then the handoff, then the newest status doc. If work restarts from an earlier known-good base, record why and what was carried over.
+
+Name each handoff with its date (plus HHMM if several that day; keep the project's prefix) and record the branch, HEAD hash, pushed yes/no and uncommitted files; updating it within the round is fine. The next session first checks these against git (branch, `git merge-base --is-ancestor <hash> HEAD`, files) and reports a mismatch, e.g. commits never pushed from the other PC, before other work. Open steps end with `[ran: <outcome>]`, `[read]` or `[UNVERIFIED]`; writing steps (generators, APK builds, schema promotions, adb restores) not `[ran]` get a read-only check first. Newest = the date in the name, not file time.
 
 ## Lost or long sessions (2026-10-14)
 
@@ -115,6 +125,7 @@ When a session is close to its usage limit or work moves to another person's Cla
 
 ## Changelog
 
+- 2026-10-18: §2 standing decisions and deny-rule check; §4 silent-run, gate-edit, sibling, deletion and debugging checks; §5 checklist sources and fixed pass bars; §7 harvest during the round; status doc and handoff fields. Ideas adapted from gstack (MIT, Garry Tan).
 - 2026-10-14: language follows `user-instructions.md` (English files, `## Summary`; Korean chat only on request); lost-session recovery and archiving; lessons: "merged" check, repo visibility, Unity per-PC signing key.
 
 - 2026-10-06 (b): superpowers leads the process in Claude Code; this skill is the Hyun layer (한국어 요약, worktree note, commit style).
