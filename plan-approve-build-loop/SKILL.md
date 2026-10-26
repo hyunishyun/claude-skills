@@ -121,9 +121,16 @@ Name each handoff with its date (plus HHMM if several that day; keep the project
 - "Merged" means the branch tip is in `main`: check `git log --oneline main..<branch>` before saying so. Hand Hero PR #2 (10/12) merged `auto/2026-10-12-r9` before Z2–Z4 ran, so 11 later commits and every branch built on them stayed out of `main`.
 - Check repo visibility (`gh repo view <owner>/<repo> --json visibility`) instead of assuming: `hand-hero` was public until 10/14. Contest submissions may need it public again.
 - Unity Android dev builds are signed with a per-PC debug key: an APK built on a new PC cannot install over one from another PC. `adb pull` the app's `files/` first, then uninstall and install (wipes saved settings). A keystore committed to the project avoids it.
+- Unattended workflow runs (Hand Hero 2026-10-25): a run started in a turn whose user message is an unrelated question can have a build agent decline ("the request was only a question"); start runs from a turn that asks for the work, or state in the prompt which standing pipeline started it. A desktop-app restart kills the run, and runs cannot be resumed across sessions: restart with a `startAt` argument. `TaskStop` takes the task ID, not the run ID. A session cron watchdog re-reads the whole chat each tick: delete it as soon as nothing is running.
+- Usage budget (Hand Hero 2026-10-25): per-task review panels and long balance sweeps used most of the weekly limit. For look slices skip per-task reviews and review once at the end; for balance aim for a difficulty staircase with one quick simulation check and let the headset decide (Hyun: "시뮬레이션돌려서검사하는데에 너무 많은 시간 쓰지마").
+- Build a small look slice with an OLD / NEW toggle before a full art pass: Hyun kept only the terrain of the 10/25 slice, which saved building the rest in a direction he did not want.
+- Quest recordings are a centre crop of the view: table-top content sits at the bottom edge. Without ffmpeg, read frames by serving the video with HTTP Range support and drawing it into a canvas in the browser pane (crop to the region on the canvas; a hidden pane screenshots small).
+- Meta Quest store and dashboard facts (untrusted packages, age group, Data Use Checkup, release channels, headset accounts): `references/quest-dashboard.md`.
 - Two integration branches in parallel (hackix26 `team/one-app` and hack-ix-2026 `hyun/ailo-base`, 2026-10-04) left it unclear which build was final. Keep one integration branch and name the demo build by commit/tag.
 
 ## Changelog
+
+- 2026-10-26: lessons from Hand Hero 10/25: workflow runs (declines, restarts, TaskStop, watchdog cost), usage budget (reviews, sweeps), look slice first, Quest recording frames; new `references/quest-dashboard.md`.
 
 - 2026-10-18: §2 standing decisions and deny-rule check; §4 silent-run, gate-edit, sibling, deletion and debugging checks; §5 checklist sources and fixed pass bars; §7 harvest during the round; status doc and handoff fields. Ideas adapted from gstack (MIT, Garry Tan).
 - 2026-10-14: language follows `user-instructions.md` (English files, `## Summary`; Korean chat only on request); lost-session recovery and archiving; lessons: "merged" check, repo visibility, Unity per-PC signing key.

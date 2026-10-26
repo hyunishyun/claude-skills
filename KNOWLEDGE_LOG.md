@@ -52,3 +52,5 @@ Dated record of where the knowledge in these skills came from, which sources dis
 - HackIX: submitted repo, build and tag; whether `SERVICE_NOT_FOUND` was resolved; device results for the 10/4 work.
 - Firmware version for the HackIX Bee There device notes (assumed 128.0.0.172.321).
 - Fridge: capstone W8 item or portfolio only.
+
+- 2026-10-26 (Hand Hero, NB-R123-08): plan-approve-build-loop lessons (workflow declines/restarts/TaskStop/watchdog cost, usage budget, look slice first, Quest recording frames) and references/quest-dashboard.md (UNTRUSTED packages, age group, Data Use Checkup, release channels, headset accounts); evidence-and-claims 5b asset, font and music licences.

@@ -59,6 +59,13 @@ Build a project-specific say/don't-say table for every pitch and video; pitch wr
 - Posts: credit teammates and the challenge host, ask before tagging people, state Hyun's own role in one line ("main developer: …"), mark anything unverified as `[Check: …]` until confirmed, disclose scripted demos.
 - Keep footage, logs and test media out of git; copy them off the school PC right away.
 
+## 5b. Third-party assets, fonts and music (licences)
+
+- Every bought or downloaded asset must allow use in a distributed app **and** in its trailer / promo video; keep the licence file, receipt or store-page link beside the asset and list it in the project's `THIRD_PARTY_NOTICES.md`.
+- OK: Unity Asset Store standard EULA (private repos fine; never redistribute the raw files), CC0 (Kenney, Quaternius), CC-BY (credit required), SIL OFL fonts, Mixamo animations. Avoid: CC-BY-SA, NC ("non-commercial": prize contests count as commercial), ND (no recolouring), "personal / editorial use only", ripped or fan assets, brands, logos, real people.
+- Paid fonts need an app / embedding licence, not only "desktop". Store tiers like "Personal (under $100k revenue or funding) / Professional" usually differ by buyer size, not usage rights: an individual student buys Personal (Hyun 2026-10-26, Fab-style tiers).
+- Music: check game use and online-video use separately, YouTube Content ID claims (whitelisting), and whether a subscription must stay active; check the contest rules before using AI-generated music or art.
+
 ## 6. Keep documents in sync
 
 - When a status, test count, version or schema number changes, update every doc that states it in the same commit (README, status docs, release notes, CLAUDE.md, proposal slides); grep for the old value.
@@ -66,5 +73,7 @@ Build a project-specific say/don't-say table for every pitch and video; pitch wr
 - For capstone reporting, say what question each experiment answered, not only what was built.
 
 ## Changelog
+
+- 2026-10-26: section 5b, licences for bought assets, fonts and music (Hand Hero asset purchase).
 
 - 2026-10-06: created from HackIX 2026 docs (research brief rules, TEAM_ALIGNMENT section 5, pitch-service-animal, pitch-neural-band, demo video honesty rules, release notes), the LiftLens case study and the XR 455 PoC review.

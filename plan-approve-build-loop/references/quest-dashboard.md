@@ -1,0 +1,10 @@
+# Meta Quest store and dashboard notes (from Hand Hero, 2026-10-25)
+
+Labels: [DASHBOARD] seen on Meta's developer dashboard by Hyun; [DOCS] Meta docs; [DEVICE] Quest 3 result; [UNVERIFIED].
+
+- [DEVICE] Spatial-anchor save and scene/room data (`discoverSpaces`) fail with `ERROR_PACKAGE_UNTRUSTED(-10035)` on a sideloaded APK of an app not registered on the dashboard. [DOCS] Meta's fix list for "App is untrusted": create the app (Meta Horizon Store), age group, Data Use Checkup (User ID, User Profile), App ID in the Platform SDK settings, sign in as a developer or test account of the owning team. Whether registration alone (without an ALPHA-channel install) fixes it: [UNVERIFIED]; Meta is also investigating sporadic UNTRUSTED on registered apps.
+- [DASHBOARD] Age Group Self-Certification opens from App overview, "App product detail page", the Production build link ("No build uploaded to Production (Store) channel"). The App ID is under Development > API (not secret; the App Secret is).
+- [DASHBOARD] Data Use Checkup use cases are Platform SDK features only (achievements, IAP, avatars, cloud storage, leaderboards, matchmaking, "Use rooms" = multiplayer rooms, VoIP...). A single-player app without the Platform SDK has nothing honest to pick: skip it rather than certify a false use.
+- [DOCS] Release channels (ALPHA, BETA, RC) start empty, the developer included; invite by email or create a URL invite (auto-approve option); testers install from the Library / "My Preview Apps". Every uploaded build, even ALPHA, must pass the release packaging checks (release signing, not debuggable, increasing versionCode, target SDK, manifest).
+- [DOCS / community] The headset's primary (admin) account can only be changed by a factory reset; a second account can be added without one. When the headset belongs to someone else (school), register the app under the developer's own account and install test builds as a second account; never factory-reset a shared headset.
+- [DOCS] The Unity store build reads the keystore from environment variables the developer sets in their own shell; Claude never reads, prints or stores keystores, passwords or app secrets.
