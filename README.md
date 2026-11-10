@@ -53,6 +53,14 @@ Copied unchanged on 2026-10-06; each folder keeps its source license as `LICENSE
 | `android-permissions-security` | android/skills | Manifest permissions and exported-component audit |
 | `agp-9-upgrade` | android/skills | Moving a project to Android Gradle Plugin 9 (only when upgrading) |
 
+### Third-party: UI polish
+
+| Skill | Source (license) | Use for |
+| --- | --- | --- |
+| `unslop` | [heydamir/unslop](https://github.com/heydamir/unslop), Damir Sokolovsky (CC BY 4.0; `SOURCE.md`) | Polishing AI-looking UI (web pages, artifacts, decks): direction, spacing, colour, type, copy. Used on the ASL Love presentation deck (2026-11-08) |
+
+Copied unchanged on 2026-11-08; don't edit it here.
+
 ### Plugins (installed through Claude Code, not stored in this repo)
 
 Re-run after a PC reset:

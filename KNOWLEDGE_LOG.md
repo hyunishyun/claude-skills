@@ -32,6 +32,7 @@ Dated record of where the knowledge in these skills came from, which sources dis
 | 11/02–11/05 | ASL Love | Sign words on the glasses: pre-registered test passed (precision 97.9%, coverage 80/75%); 250 words lose coverage (36/31%); class user test (0 words for beginners, 2 bugs); D219 LOW quality, D220 own log file, D222 hand choice, D224 phone demo view | test logs, D204–D225 |
 | 11/05–11/08 | ASL Love | Presentation for 11/11 (Meta Wearables staff attending): developer-perspective deck EN/KO, limits-vs-asks table, dev log | `docs/presentation/` |
 | 11/09 | Skills | ASL Love harvest: DAT camera ladder, platform refusal, stuck link, logging/adb, on-phone vision (`ray-ban-display-app-dev`); HUD rules 24–27; measured results and developer talks (`evidence-and-claims`); standing authority, device guides, long jobs, multi-PC, golden twins (`plan-approve-build-loop`); PC list (`user-instructions.md`); capstone reuse line; new `asl-love-project` | this session |
+| 11/10 | Skills | Third-party `unslop` (heydamir, CC BY 4.0) committed with `SOURCE.md` and a README entry | this session |
 
 ## Conflict ledger
 
