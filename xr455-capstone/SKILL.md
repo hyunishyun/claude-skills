@@ -67,6 +67,7 @@ Order inversion to watch: features (Program model, Fridge, HackIX experiments) r
 - **PoC slide 8 claims, now with evidence:** head nod = glasses IMU at 60 Hz works, gesture itself untested; "pause workout when glasses come off" = wear state is tracked in hackix26; hands-free "log set" = English only; "Hey Meta" launch = needs a Developer Center permission, untried; ActionRole.PRIMARY = measure it (test idea: make sticky ± keep a fixed button order and move PRIMARY to the last-pressed button instead of reordering).
 - **Ticking screens after migration:** SDK `text` flickers on resend in 1.0 (Bee There) — check the rest-timer screen in the regression.
 - **Neural Band:** gives apps gestures, not wrist motion; band presses cards natively when the app does not subscribe it.
+- **ASL Love (2026-10/11, DAT 1.0.0 on the S25):** camera vision on the phone at real distances needs a person-first crop (hands 12-15% to 87-89% at the glasses' frame size); ask the camera for LOW (MEDIUM drops to 360 x 640 within about a minute on Bluetooth); an in-app process restart recovers a stuck DAT link; the app's own rotating log file; a phone demo view that composites the glasses card over the camera picture for presentations. Patterns in `ray-ban-display-app-dev`, rules 24-27 in `glasses-hud-design-rules`.
 - **CONDUCTOR:** comparison point for the input-constraint argument (Web App gets pinch/swipes/drag as key and pointer events vs native DAT 0.9 onClick only; DAT 1.0 adds Nav/Select/Drag), a gesture-onboarding step before playtests (W9), and a cue/conductor narrative link to Production HUD.
 
 ## PoC document items that are out of date
@@ -79,4 +80,5 @@ Exact midterm date · LiftLensMini commits after 9/26 and whether the 1.0 migrat
 
 ## Changelog
 
+- 2026-11-09: reuse-map line for ASL Love's glasses results.
 - 2026-10-06: created from the pitch deck, the PoC proposal (timeline read from the slide image), the LiftLens case study, the project skills and the HackIX 2026 status docs.

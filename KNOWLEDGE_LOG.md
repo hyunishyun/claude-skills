@@ -27,6 +27,11 @@ Dated record of where the knowledge in these skills came from, which sources dis
 | 10/14 | Hand Hero | Pivot spec: hand-flown 3D aerial quidditch, 3v3, 6-team tournament run (`hyun/quidditch` 944bebd); repo made private | Claude Code session 0e007893, this session |
 | 10/14 | Skills | Language rule: English by default, Korean chat on request, files always English (`## Summary` replaces `## 한국어 요약`); desktop app lost its session list — recovery steps added | this session |
 | 10/18 | Skills | Harvest from gstack (MIT, Garry Tan; 8640ab4), read against the Hand Hero cleanup rounds, ideas only: silent-run, gate-edit, sibling, safe-deletion and debugging checks, standing decisions in specs, deny-rule check, checklist sources, handoff reconcile (`plan-approve-build-loop`); rulings vs Hyun's direction, flaky tests, unattended debugging (`user-instructions.md`); history secret scan, retro format (`hackathon-sprint-playbook`). No new skill, no gstack tools | Claude Code session 10/18 |
+| 10/16–10/22 | ASL Love | Quest rounds 4–11: partner camera on the headset, mannequin rig (loss split: Android MediaPipe 0.1, monitor + camera 12.2 points), comb2 v2 sign model, partner recognition 53/75 right 0 wrong on the rig, wearer fingerspelling reply (A E M N S T ≤ 31%), partner fingerspelling | repo `docs/test-logs/`, DECISIONS D31–D134 |
+| 10/23–10/28 | ASL Love | Glasses app (round 12–13, DAT 1.0.0, S25): letters on the glasses, Developer Mode registration failure, ABR drop to 360×640, stuck link ~6 min, glasses recording takes the camera; two-way MVP with phone speech reply; fluent fingerspelling model (FSboard CER ~5%) behind a gate; 10/28–11/04 every DAT session refused with UPDATE_REQUIRED (Meta sample too) | `docs/HARDWARE_FACTS.md`, test logs, D135–D203 |
+| 11/02–11/05 | ASL Love | Sign words on the glasses: pre-registered test passed (precision 97.9%, coverage 80/75%); 250 words lose coverage (36/31%); class user test (0 words for beginners, 2 bugs); D219 LOW quality, D220 own log file, D222 hand choice, D224 phone demo view | test logs, D204–D225 |
+| 11/05–11/08 | ASL Love | Presentation for 11/11 (Meta Wearables staff attending): developer-perspective deck EN/KO, limits-vs-asks table, dev log | `docs/presentation/` |
+| 11/09 | Skills | ASL Love harvest: DAT camera ladder, platform refusal, stuck link, logging/adb, on-phone vision (`ray-ban-display-app-dev`); HUD rules 24–27; measured results and developer talks (`evidence-and-claims`); standing authority, device guides, long jobs, multi-PC, golden twins (`plan-approve-build-loop`); PC list (`user-instructions.md`); capstone reuse line; new `asl-love-project` | this session |
 
 ## Conflict ledger
 
@@ -43,6 +48,8 @@ Dated record of where the knowledge in these skills came from, which sources dis
 | C9 | LiftLens numbers in the PoC | PoC: "2 working weeks", schema v2 | Case study: "4 working days", schema v3 | Schema v3; recount days/commits from the reflog. |
 | C10 | PoC Gantt bars | Earlier text-only estimate (W6–9 offsets) | Slide image: Inputs W7, Fridge W8, playtest W9, final W10, midterm between W4 and W5 | Slide image. |
 | C11 | "Hardware-verified" claims for 10/3 card changes | Some docs list D2/D3/D7 among results | Release notes: unit-tested only | Unit-tested only until a device check is recorded. |
+| C13 | Stuck DAT link duration | hackix26: DISCONNECTED 100+ s | ASL Love 10/23: about 6 min while Meta AI showed CONNECTED | Keep both (device, different apps); same fix: a fresh process reconnects in 0.5–1 s. |
+| C14 | MEDIUM camera stream | Fridge 9/29: 504×896 at 24 fps streamed | ASL Love 10/23–11/05: every MEDIUM run dropped to 360×640 within 10–75 s (once recovered) | Keep both; the Bluetooth ABR ladder explains it. Rule: ask for LOW for vision; log the delivered size. |
 | C12 | Skill install state (10/6) | 10/5 zips: HUD rules 14–18, harvest step, two new skills | Installed: only `ray-ban-display-app-dev` updated | This repo restores and supersedes the 10/5 versions. |
 
 ## Open confirmations
@@ -52,5 +59,6 @@ Dated record of where the knowledge in these skills came from, which sources dis
 - HackIX: submitted repo, build and tag; whether `SERVICE_NOT_FOUND` was resolved; device results for the 10/4 work.
 - Firmware version for the HackIX Bee There device notes (assumed 128.0.0.172.321).
 - Fridge: capstone W8 item or portfolio only.
+- ASL Love: glasses firmware version for the 10/23–11/05 device notes (not recorded; phone, Meta AI and DAT versions are).
 
 - 2026-10-26 (Hand Hero, NB-R123-08): plan-approve-build-loop lessons (workflow declines/restarts/TaskStop/watchdog cost, usage budget, look slice first, Quest recording frames) and references/quest-dashboard.md (UNTRUSTED packages, age group, Data Use Checkup, release channels, headset accounts); evidence-and-claims 5b asset, font and music licences.

@@ -58,5 +58,6 @@ Loaded from `~/.claude/CLAUDE.md` (`@~/.claude/skills/user-instructions.md`). Th
 - Gradle: the project wrapper — `.\gradlew.bat <task>` (PowerShell) or `./gradlew <task>` (Git Bash). With chrisbanes `gradle-run`, pass `gradlew.bat` as the command; if its wrapper fails, or `agp-9-upgrade` is active, run the wrapper directly.
 - Python from Git Bash: pass Windows paths (`cygpath -w`), not `/c/...`. The console is cp1252, so Korean output crashes `print`; call `sys.stdout.reconfigure(encoding='utf-8')` (`-I` ignores `PYTHONIOENCODING`).
 - Git: global `user.name hyunishyun` is set; `core.autocrlf=true` comes from Git for Windows' system gitconfig, so Unity repos produce line-ending-only changes unless the repo has a `.gitattributes` (Hand Hero added one in round 10).
-- The PC restarts overnight for Windows Update; long unattended runs must be resumable.
+- The PC restarts overnight for Windows Update; long unattended runs must be resumable (start them detached and hidden: `plan-approve-build-loop` lessons).
+- Hyun works on several school PCs (NB-R123-01 to -04 and -09 by 2026-11; AISTUDIO login). Each keeps its own git-ignored data; a project's CLAUDE.md says which PCs may hold licensed data. ASL Love only: yt-dlp under `%USERPROFILE%\asllove_tools\ytdlp` (2026-10-28).
 - Never install tools or run remote install scripts (android CLI, Node, perfetto helpers, UI Toolkit skill installers) without asking Hyun first: say what, from where, and that the school PC may reset. If a skill needs a missing tool, say so and give Hyun the command.

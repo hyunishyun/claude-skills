@@ -58,6 +58,8 @@ Build a project-specific say/don't-say table for every pitch and video; pitch wr
 - Use the exact on-screen copy from the code. Show a report line exactly as printed, never rounded up.
 - Posts: credit teammates and the challenge host, ask before tagging people, state Hyun's own role in one line ("main developer: …"), mark anything unverified as `[Check: …]` until confirmed, disclose scripted demos.
 - Keep footage, logs and test media out of git; copy them off the school PC right away.
+- Check every frame of a screen or camera recording before it goes anywhere: a monitor in the background can show licensed dataset clips or other people (ASL Love `learning.mov` showed dataset signers at 0–1.9 s and 4.0–5.4 s). Cut those frames; an uncut version is used only where a recorded decision allows it (one named venue), never in public posts.
+- People who appear in footage (participants, testers) need a filming consent of their own; a study consent that says "no video" rules out recording that session.
 
 ## 5b. Third-party assets, fonts and music (licences)
 
@@ -72,7 +74,23 @@ Build a project-specific say/don't-say table for every pitch and video; pitch wr
 - Flag stale docs explicitly ("README still says 'SDK not integrated'") instead of silently trusting them; prefer source and Gradle files over prose.
 - For capstone reporting, say what question each experiment answered, not only what was built.
 
+## 7. Measured results (models, recognition, tests)
+
+- **Pre-register before any number exists:** the data set (list + SHA-256), the pass bars, and what each outcome leads to ((a) ship, (b) keep the old default, (c) engineering fix). Run the test once; a held-out test set read once is spent. A run cut by a crash or a setup error is recorded as void with its reason, not silently rerun; a bar moved after seeing data is a new test.
+- Report precision **with** coverage and the false-show rate (inputs outside the vocabulary shown as a word), with counts and an interval ("40 of 50 = 80.0% [67.0, 88.8]"). A model that shows 0 words for beginners or out-of-list signs is behaving as designed: report it as evidence, don't tune it away.
+- Say which input produced the number: "dataset clips replayed on the phone", "validation clips on a monitor (a pipeline check)", "webcam videos of unseen signers (offline upper bound)" are three different claims, and none of them is "accuracy with a live user".
+- Split a loss before fixing it: run the same clips through each stage (PC library, phone library, monitor + camera) and name the stage that costs the points (ASL Love: Android MediaPipe 0.1 points, monitor + camera 12.2).
+
+## 8. Developer talks and platform-team audiences
+
+- Structure a developer talk as problems met: for each, the symptom, the cause found, the fix, the measured before → after, and what is still unsolved. Keep a fact sheet in the repo where every number on a slide has its source (test log, decision row, script).
+- For an audience from the platform vendor (e.g. Meta Wearables staff): a table "what I observed (on record) | what would unlock it". Every limit traces to a log line or test log with its date; asks are concrete (a quality floor, foreground-service streaming, in-SDK session recovery, a status page). No limit from memory or forums alone.
+- Principles slide: state each as a rule you now follow with the incident that taught it, not as an adjective ("I fix the pass bar before I see the data").
+- Slides artifact (claude.ai Slides type) notes: Korean text needs a Korean webfont (IBM Plex Sans KR); big numbers need `white-space:nowrap`; a connector inside a stretched flex row draws diagonally, so give it `height:2px; align-self:center`; GIFs go to the artifact's asset store and are copied between decks by asset id; read the deck again before editing when Hyun has edited it in the page.
+
 ## Changelog
+
+- 2026-11-09: section 5 frame check of recordings and filming consent; section 7 measured results (pre-registration, precision with coverage, name the input, split a loss); section 8 developer talks for platform-team audiences and Slides artifact notes (ASL Love 2026-10/11, presentation for 2026-11-11).
 
 - 2026-10-26: section 5b, licences for bought assets, fonts and music (Hand Hero asset purchase).
 

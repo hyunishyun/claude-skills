@@ -49,11 +49,22 @@ Scope: native DAT display-DSL apps. For **Web Apps**, Meta's UI Toolkit guidance
 22. **Sensors are user-started, named on the card, and end quietly.** A card states when a sensor is on and until when ("Camera on for the door lock." / "until 8:52 AM"). Ending shows a short confirmation ("Camera off." for 3 s) and then nothing — no "ended" card. The glasses never re-offer a sensor-starting button on their own (a stray pinch must not turn a camera on); restart comes from the phone.
 23. **Blank when nothing is happening.** Between sessions the glasses show nothing (no idle line, no card background) — the companion is visibly absent when absent. (How to draw "nothing" — one invisible space, no card background — is unit-tested in hackix26 but *unverified* on the glasses.)
 
+### Recognition output (captions from a model — ASL Love, 2026-10/11)
+
+24. **Show a result only above a threshold fitted for precision; otherwise show nothing or "?".** Fit the threshold before the test on held-out data (e.g. shown results ≥ 90% right and inputs outside the vocabulary shown ≤ 2%), and accept low coverage: a missed word costs the reader less than a confident wrong one. "?" may carry a reason ("not sure", "not a list word"). Never present the output as a translation.
+25. **Label what is unconfirmed on the card itself** (a second caption line such as "fluent model; unconfirmed" or "50 provisional words"), and nothing the model read is voiced or logged as "said" until the user confirms it.
+26. **Don't show a guess before the source is decided.** When the input could come from more than one source (which hand signs, which speaker), show nothing from either until one clearly leads (hysteresis: an EMA of each source's activity and a margin; ASL Love needs ~0.9 s), then show the open result whole. Early guesses from the wrong source (a hand holding a phone or a card) read as nonsense letters. Pair it with an operating rule in the session plan (only the signing hand raised).
+27. **Two directions, two fixed zones in one bitmap.** When one card carries both what the partner did and the wearer's own reply, give each a fixed zone (partner on top, reply below) in a single composed bitmap (rule 14), each with its own hold time; a stale result is dropped, never shown late.
+
 ## Phone screens that mirror the glasses
+
+To show the wearer's view on a phone, projector or screen recording (the glasses' own recording takes the camera), composite the exact card bitmap sent to the glasses over the camera picture as light: alpha = the brightest channel, black = see-through (ASL Love "demo view", 2026-11-05; checked on the phone with a test caption).
 
 Give Compose columns `verticalScroll` + top alignment (centered fixed-height columns clip and truncate labels), keep button rows to three, and let the phone follow the engine's active activity with a guarded `LaunchedEffect` so glasses-side switches move the phone but never hijack non-activity routes (Connect, Samples, History).
 
 ## Changelog
+
+- 2026-11-09: rules 24–27 for recognition output (precision-fitted threshold, unconfirmed labels, no guess before the source is decided, two zones) and the additive phone mirror, from ASL Love's glasses app (DAT 1.0.0, 2026-10/11).
 
 - 2026-10-06: restored the 2026-10-05 rules that were never installed (3 revised, 14–18, conditional Back in 15, rule 11 tied to it); added 19–23 from hackix26 / OCD Companion (display arbiter, turning points, once per loop, user-started sensors with quiet ends, blank idle) and the copy-limit test in rule 9.
 - 2026-10-05: rules 3 (animated screens), 14–18 from HackIX2026 / Bee There device tests (DAT 1.0.0, 2026-10-02); rule 15 made conditional on a Back check.

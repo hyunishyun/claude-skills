@@ -1,6 +1,6 @@
 # claude-skills — Hyun's Claude skills
 
-Everything learned across Hyun's projects (LiftLens / Production HUD, Fridge Assistant, HackIX 2026, CONDUCTOR, the XR 455 capstone), kept as Claude skills so every new Claude.ai chat or Claude Code session starts from what was already proven. This repo is the **single source of truth**; installed copies are just copies.
+Everything learned across Hyun's projects (LiftLens / Production HUD, Fridge Assistant, HackIX 2026, CONDUCTOR, ASL Love, the XR 455 capstone), kept as Claude skills so every new Claude.ai chat or Claude Code session starts from what was already proven. This repo is the **single source of truth**; installed copies are just copies.
 
 Dated history and conflict decisions: `KNOWLEDGE_LOG.md`.
 
@@ -11,13 +11,14 @@ Dated history and conflict decisions: `KNOWLEDGE_LOG.md`.
 | Skill | Kind | Use for |
 | --- | --- | --- |
 | `ray-ban-display-app-dev` | General — SDK and hardware facts | Meta Ray-Ban Display / DAT 1.0: setup, session, display, inputs, Neural Band, motion, speech, camera, on-phone vision, Web Apps, build environment, off-device verification, Figma track |
-| `glasses-hud-design-rules` | General — screen design | Rules 1–23 for glasses cards: cursor reset, ticking/animated screens, Back check, band input modes, display arbiter, nudges, quiet ends |
+| `glasses-hud-design-rules` | General — screen design | Rules 1–27 for glasses cards: cursor reset, ticking/animated screens, Back check, band input modes, display arbiter, nudges, quiet ends |
 | `plan-approve-build-loop` | General — how we work | Hyun layer on top of superpowers: language rule, PowerShell guidance, off-device verification, device test checklist, commit style, devlog, skill harvest; team repos; handoffs; lost-session recovery (full plan → approval loop where superpowers isn't installed) |
 | `hackathon-sprint-playbook` | General — process | Hackathons, sprints, crits: prep, brief, concepts, survey, team contracts, integration, rounds, inclusive checklist, demo video, release |
 | `evidence-and-claims` | General — words | Research briefs, pitches, presentations, release notes, posts: status words, sourcing, say / don't say, health copy, doc sync |
 | `xr455-capstone` | Project | Capstone question, roadmap, Fall PoC scope and timeline, progress format, reuse map |
 | `liftlens-project` | Project | LiftLens Mini / Production HUD repo context |
 | `fridge-assistant-project` | Project | Fridge Assistant repo context |
+| `asl-love-project` | Project | ASL Love (signer → glasses captions; Quest bench, glasses app, ML): where state lives, rules, reusable lessons |
 | `hackix2026-project` | Project | Bee There, OCD Companion (hackix26), Ailo — both repos (replaces `hackix2026-bee-there-project`) |
 
 Rule of thumb: facts that hold for every glasses app go in a general skill; paths, decisions and state go in a project skill. Two device results that disagree are both kept, with date and app, plus the safe rule.
@@ -92,7 +93,7 @@ git checkout -f -t origin/main
 ```
 If `.claude\skills` doesn't exist yet, a plain `git clone https://github.com/hyunishyun/claude-skills.git "$env:USERPROFILE\.claude\skills"` works too. Success: `$env:USERPROFILE\.claude\skills\xr455-capstone\SKILL.md` exists. If an older copy of `hackix2026-bee-there-project` sits in a project repo's `.claude/skills/`, remove it there so it doesn't load next to `hackix2026-project`.
 
-**Claude.ai** (also used by the desktop app's chat): Settings → Capabilities → Skills → upload each changed skill as a zip of its folder, replacing the old one. Upload only Hyun's 9 skills there (not the third-party ones — they would crowd the description budget). Make a zip with:
+**Claude.ai** (also used by the desktop app's chat): Settings → Capabilities → Skills → upload each changed skill as a zip of its folder, replacing the old one. Upload only Hyun's 10 skills there (not the third-party ones — they would crowd the description budget). Make a zip with:
 ```powershell
 tar.exe -a -c -f "$env:USERPROFILE\Downloads\<skill-name>.zip" -C "$env:USERPROFILE\.claude\skills" <skill-name>
 ```
